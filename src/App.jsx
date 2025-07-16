@@ -29,7 +29,7 @@ function App() {
             </div>
             <div className="feature-card">
               <div className="feature-icon">🎨</div>
-              <h3>Beautiful Design</h3>
+              <h3>A new nasty button</h3>
               <p>Modern and intuitive interface that provides an excellent user experience.</p>
             </div>
             <div className="feature-card">
