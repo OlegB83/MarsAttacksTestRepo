@@ -6,6 +6,9 @@ export default defineConfig({
   server: {
     allowedHosts: ['*.preview.matter.labs.jb.gg'],
     port: 3000,
-    host: true
+    host: true,
+    allowedHosts: [
+      'preview-dec5-ffa3-725f-d225.preview.matter.labs.jb.gg'
+    ]
   }
 })
