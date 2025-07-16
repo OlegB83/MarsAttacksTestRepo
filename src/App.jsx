@@ -11,7 +11,7 @@ function App() {
             Discover the power of modern web development with our cutting-edge solutions
           </p>
           <div className="hero-buttons">
-            <button className="btn btn-primary">Get Started</button>
+            <button className="btn btn-primary">Button</button>
             <button className="btn btn-secondary">Learn More</button>
           </div>
         </div>
