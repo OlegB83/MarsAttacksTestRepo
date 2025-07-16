@@ -2,40 +2,43 @@ import './App.css'
 
 function App() {
   return (
-    <div className="landing-page">
+    <div className="mars-landing">
       {/* Hero Section */}
       <section className="hero">
+        <div className="alien-overlay"></div>
         <div className="hero-content">
-          <h1 className="hero-title">Welcome to Our Amazing Platform</h1>
+          <div className="ufo">🛸</div>
+          <h1 className="hero-title">MARS ATTACKS!</h1>
           <p className="hero-subtitle">
-            Discover the power of modern web development with our cutting-edge solutions
+            THE INVASION HAS BEGUN • RESISTANCE IS FUTILE • WELCOME YOUR NEW OVERLORDS
           </p>
           <div className="hero-buttons">
-            <button className="btn btn-primary">Button</button>
-            <button className="btn btn-secondary">Learn More</button>
+            <button className="btn btn-primary">JOIN THE INVASION</button>
+            <button className="btn btn-secondary">SURRENDER NOW</button>
           </div>
         </div>
+        <div className="mars-bg"></div>
       </section>
 
       {/* Features Section */}
       <section className="features">
         <div className="container">
-          <h2 className="section-title">Why Choose Us?</h2>
+          <h2 className="section-title">ALIEN TECHNOLOGY</h2>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🚀</div>
-              <h3>Lightning Fast</h3>
-              <p>Built with performance in mind, our platform delivers exceptional speed and reliability.</p>
+              <div className="feature-icon">👽</div>
+              <h3>BRAIN EXTRACTION</h3>
+              <p>Advanced Martian technology for efficient human brain harvesting and analysis.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🎨</div>
-              <h3>A new nasty button</h3>
-              <p>Modern and intuitive interface that provides an excellent user experience.</p>
+              <div className="feature-icon">🛸</div>
+              <h3>DEATH RAYS</h3>
+              <p>State-of-the-art disintegration weapons that reduce humans to colorful skeletons.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🔧</div>
-              <h3>Easy to Use</h3>
-              <p>Simple and straightforward tools that help you achieve your goals effortlessly.</p>
+              <div className="feature-icon">🔴</div>
+              <h3>MIND CONTROL</h3>
+              <p>Hypnotic Martian powers to bend human will and establish our galactic empire.</p>
             </div>
           </div>
         </div>
@@ -44,7 +47,7 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; 2024 Your Company. All rights reserved.</p>
+          <p>ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION</p>
         </div>
       </footer>
     </div>
