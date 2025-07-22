@@ -272,6 +272,28 @@
   letter-spacing: 0.05em;
 }
 
+/* Language Switch Button */
+.lang-switch-btn {
+  position: fixed;
+  top: 1.5rem;
+  right: 2rem;
+  z-index: 1000;
+  background: #330011;
+  color: #ffff00;
+  border: 2px solid #ff0000;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff0000;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-switch-btn:hover {
+  background: #ff0000;
+  color: #fff;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-title {
