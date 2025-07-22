@@ -1,3 +1,13 @@
+html, body, #root {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Mars Attacks! Landing Page Styles */
 .mars-landing {
   min-height: 100vh;
