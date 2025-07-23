@@ -599,3 +599,44 @@ body, .mars-landing, .feature-card p {
 .features, .hero, .footer {
   margin-bottom: 2.5rem;
 }
+
+/* Centralize all text and buttons */
+.mars-landing,
+.hero-content,
+.features,
+.feature-card,
+.hero-buttons,
+.footer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure feature-card text is centered */
+.feature-card h3,
+.feature-card p {
+  text-align: center;
+}
+
+/* Ensure buttons are centered in their containers */
+.hero-buttons,
+.features .container > div {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive: keep centering on mobile */
+@media (max-width: 600px) {
+  .mars-landing,
+  .hero-content,
+  .features,
+  .feature-card,
+  .hero-buttons,
+  .footer {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
