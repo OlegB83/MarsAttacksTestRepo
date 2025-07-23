@@ -8,6 +8,67 @@ html, body, #root {
   box-sizing: border-box;
 }
 
+/* Navigation Bar Styles */
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 60px;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  padding: 0 2rem;
+}
+.nav-logo img {
+  height: 2.5rem;
+  display: block;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li {
+  display: flex;
+  align-items: center;
+}
+.nav-links a {
+  color: #ffff00;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.nav-links a:hover, .nav-links a:focus {
+  background: #ff0000;
+  color: #fff;
+  box-shadow: 0 0 8px #ff0000;
+}
+@media (max-width: 768px) {
+  .main-nav {
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem 1rem;
+  }
+  .nav-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.mars-landing {
+  padding-top: 60px; /* offset for fixed nav */
+}
+
 /* Mars Attacks! Landing Page Styles */
 .mars-landing {
   min-height: 100vh;
@@ -22,18 +83,49 @@ html, body, #root {
   padding: 0 2rem;
 }
 
-/* Hero Section */
+/* Hero Section Animation: Animated Stars */
 .hero {
-  background: radial-gradient(circle at center, #1a0033 0%, #000 50%, #330011 100%);
-  color: #00ff00;
-  padding: 6rem 0;
-  text-align: center;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
+}
+.hero-bg-anim {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+.hero-tagline {
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+  text-shadow: 0 0 8px #000, 0 0 2px #ff0;
+  font-style: italic;
+}
+.hero-cta {
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff0000 0%, #ffff00 100%);
+  color: #000;
+  border: none;
+  border-radius: 2rem;
+  padding: 1.2rem 3rem;
+  box-shadow: 0 0 30px #ff0000, 0 0 10px #ffff00;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.hero-cta:hover, .hero-cta:focus {
+  background: linear-gradient(90deg, #ffff00 0%, #ff0000 100%);
+  color: #ff0000;
+  box-shadow: 0 0 40px #ffff00, 0 0 20px #ff0000;
+  transform: scale(1.05);
 }
 
 .alien-overlay {
@@ -208,24 +300,55 @@ html, body, #root {
   max-width: none;
 }
 
+/* Feature Card Enhancements */
 .feature-card {
   background: linear-gradient(135deg, #001100 0%, #003300 100%);
   padding: 2rem;
   border: 3px solid #00ff00;
   text-align: center;
-  box-shadow: 
-    0 0 20px #00ff00,
-    inset 0 0 20px rgba(0, 255, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+  transition: all 0.3s cubic-bezier(.4,2,.6,1);
   position: relative;
   overflow: hidden;
+  border-radius: 1.2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 .feature-card:hover {
   transform: translateY(-10px) scale(1.05);
-  box-shadow: 
-    0 0 40px #00ff00,
-    inset 0 0 30px rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 40px #00ff00, 0 8px 40px #00ff00, inset 0 0 30px rgba(0, 255, 0, 0.2);
+  z-index: 2;
+}
+.feature-card .feature-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: iconBounce 2s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.feature-card .learn-more {
+  margin-top: 1.5rem;
+  background: #00ff00;
+  color: #003300;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.7rem 2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ff00;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.feature-card .learn-more:hover, .feature-card .learn-more:focus {
+  background: #003300;
+  color: #00ff00;
+  box-shadow: 0 0 20px #00ff00;
+  transform: scale(1.07);
 }
 
 .feature-card::before {
@@ -304,6 +427,28 @@ html, body, #root {
   color: #fff;
 }
 
+/* Improved Button Styles */
+.btn, .lang-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.btn:active, .lang-switch-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.btn-primary, .btn-secondary, .lang-switch-btn {
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn .btn-icon, .lang-switch-btn .btn-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.5em;
+  font-size: 1.2em;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-title {
@@ -336,6 +481,51 @@ html, body, #root {
   }
 }
 
+@media (max-width: 600px) {
+  .main-nav {
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem 0.5rem;
+  }
+  .nav-links {
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .mars-landing {
+    padding-top: 60px;
+  }
+  .hero {
+    padding: 2rem 0.5rem;
+  }
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  .hero-tagline {
+    font-size: 1rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .btn, .lang-switch-btn, .hero-cta, .learn-more {
+    width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 1.1rem 0.5rem;
+  }
+  .features {
+    padding: 2rem 0.5rem;
+  }
+  .feature-card {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
+
 /* White background for all clickable elements */
 button, .btn, .lang-switch-btn, a, select {
   background-color: #fff !important;
@@ -349,4 +539,63 @@ button:focus, .btn:focus, .lang-switch-btn:focus, a:focus, select:focus {
   background-color: #fff !important;
   color: #000 !important;
   outline: 2px solid #000;
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: #ffff00;
+  color: #000;
+  padding: 0.7em 1.5em;
+  z-index: 3000;
+  border-radius: 0 0 1em 1em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: left 0.2s;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  outline: 3px solid #ff0000;
+}
+
+/* Typography Improvements */
+.hero-title, .section-title, .feature-card h3 {
+  font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+  letter-spacing: 0.12em;
+  line-height: 1.15;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1.2rem;
+}
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 2.2rem;
+}
+.feature-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+body, .mars-landing, .feature-card p {
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+/* Section Divider */
+.section-divider {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #ff0000 0%, #ffff00 50%, #00ff00 100%);
+  margin: 3rem 0 2rem 0;
+  border-radius: 2px;
+  box-shadow: 0 0 10px #ff0000, 0 0 10px #ffff00, 0 0 10px #00ff00;
+}
+.features, .hero, .footer {
+  margin-bottom: 2.5rem;
 }

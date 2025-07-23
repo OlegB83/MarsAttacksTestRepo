@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css'
+import reactLogo from './assets/react.svg';
 
 /**
  * @typedef {Object} Translation
@@ -103,75 +104,114 @@ function App() {
   /** @type {Translation} */
   const t = translations[lang];
   return (
-    <div className="mars-landing">
-      <button className="lang-switch-btn" onClick={() => setLang(l /* 'EN' | 'RU' */ => l === 'EN' ? 'RU' : 'EN')}>
-        <span>{t.lang}</span>
-      </button>
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="alien-overlay"></div>
-        <div className="hero-content">
-          <div className="ufo">🛸</div>
-          <h1 className="hero-title"><span>{t.heroTitle}</span></h1>
-          <p className="hero-subtitle">
-            <span>{t.heroSubtitle}</span>
-          </p>
-          <div className="hero-buttons">
-            <button className="btn btn-primary"><span>{t.join}</span></button>
-            <button className="btn btn-secondary"><span>{t.surrender}</span></button>
-          </div>
+    <>
+      {/* Navigation Bar */}
+      <nav className="main-nav" role="navigation" aria-label="Main Navigation">
+        <div className="nav-logo">
+          <img src={reactLogo} alt="Logo" style={{ height: '2.5rem', verticalAlign: 'middle' }} />
         </div>
-        <div className="mars-bg"></div>
-      </section>
-
-      {/* Features Section */}
-      <section className="features">
-        <div className="container">
-          <h2 className="section-title"><span>{t.featuresTitle}</span></h2>
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-icon">👽</div>
-              <h3><span>{t.brain}</span></h3>
-              <p><span>{t.brainDesc}</span></p>
+        <ul className="nav-links">
+          <li><a href="#hero"><span>Hero</span></a></li>
+          <li><a href="#features"><span>Features</span></a></li>
+          <li><a href="#test-zone"><span>Test Zone</span></a></li>
+          <li><a href="#footer"><span>Footer</span></a></li>
+        </ul>
+      </nav>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+          <span className="btn-icon" role="img" aria-label="language">🌐</span>
+          <span>{t.lang}</span>
+        </button>
+      <div className="mars-landing" id="main-content" role="main">
+        {/* Hero Section */}
+        <section id="hero" className="hero">
+          {/* Animated stars background */}
+          <svg className="hero-bg-anim" width="100%" height="100%" viewBox="0 0 1440 600" preserveAspectRatio="none">
+            <circle cx="200" cy="100" r="2.5" fill="#fff" opacity="0.7">
+              <animate attributeName="cy" values="100;120;100" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="400" cy="200" r="1.5" fill="#ffff00" opacity="0.6">
+              <animate attributeName="cy" values="200;220;200" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="800" cy="80" r="2" fill="#ff0000" opacity="0.5">
+              <animate attributeName="cy" values="80;100;80" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="1200" cy="300" r="2.2" fill="#00ff00" opacity="0.7">
+              <animate attributeName="cy" values="300;320;300" dur="3.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="1000" cy="500" r="1.8" fill="#fff" opacity="0.5">
+              <animate attributeName="cy" values="500;520;500" dur="4.2s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+          <div className="alien-overlay"></div>
+          <div className="hero-content">
+            <div className="ufo">🛸</div>
+            <h1 className="hero-title"><span>{t.heroTitle}</span></h1>
+            <div className="hero-tagline"><span>Defend Earth or Join the Martian Empire. The choice is yours!</span></div>
+            <p className="hero-subtitle">
+              <span>{t.heroSubtitle}</span>
+            </p>
+            <div className="hero-buttons">
+              <button className="btn btn-primary" aria-label="Join the invasion"><span className="btn-icon" role="img" aria-label="join">🚀</span><span>{t.join}</span></button>
+              <button className="btn btn-secondary" aria-label="Surrender now"><span className="btn-icon" role="img" aria-label="surrender">🕊️</span><span>{t.surrender}</span></button>
+              <button className="hero-cta"><span>Start Your Adventure</span></button>
             </div>
-            <div className="feature-card">
-              <div className="feature-icon">🛸</div>
-              <h3><span>{t.rays}</span></h3>
-              <p><span>{t.raysDesc}</span></p>
-            </div>
-            <div className="feature-card">
-              <div className="feature-icon">🔴</div>
-              <h3><span>{t.mind}</span></h3>
-              <p><span>{t.mindDesc}</span></p>
+          </div>
+          <div className="mars-bg"></div>
+        </section>
+        <div className="section-divider" />
+        {/* Features Section */}
+        <section id="features" className="features">
+          <div className="container">
+            <h2 className="section-title"><span>{t.featuresTitle}</span></h2>
+            <div className="features-grid">
+              <div className="feature-card">
+                <div className="feature-icon">👽</div>
+                <h3><span>{t.brain}</span></h3>
+                <p><span>{t.brainDesc}</span></p>
+                <button className="learn-more" aria-label="Learn more about brain extraction"><span>Learn More</span></button>
+              </div>
+              <div className="feature-card">
+                <div className="feature-icon">🛸</div>
+                <h3><span>{t.rays}</span></h3>
+                <p><span>{t.raysDesc}</span></p>
+                <button className="learn-more" aria-label="Learn more about death rays"><span>Learn More</span></button>
+              </div>
+              <div className="feature-card">
+                <div className="feature-icon">🔴</div>
+                <h3><span>{t.mind}</span></h3>
+                <p><span>{t.mindDesc}</span></p>
+                <button className="learn-more" aria-label="Learn more about mind control"><span>Learn More</span></button>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Interactive Test Section */}
-      <section className="features">
-        <div className="container">
-          <h2 className="section-title"><span>{t.testZone}</span></h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', marginTop: '2rem' }}>
-            {/* Dropdown simulation */}
-            <DropdownSimulator t={t} />
-            {/* Text lines toggle */}
-            <TextLinesToggle t={t} />
-            {/* Click counter */}
-            <ClickCounter t={t} />
-            {/* Color toggle button */}
-            <ColorToggleButton t={t} />
+        </section>
+        <div className="section-divider" />
+        {/* Interactive Test Section */}
+        <section id="test-zone" className="features">
+          <div className="container">
+            <h2 className="section-title"><span>{t.testZone}</span></h2>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', marginTop: '2rem' }}>
+              {/* Dropdown simulation */}
+              <DropdownSimulator t={t} />
+              {/* Text lines toggle */}
+              <TextLinesToggle t={t} />
+              {/* Click counter */}
+              <ClickCounter t={t} />
+              {/* Color toggle button */}
+              <ColorToggleButton t={t} />
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <p><span>{t.footer}</span></p>
-        </div>
-      </footer>
-    </div>
+        </section>
+        <div className="section-divider" />
+        {/* Footer */}
+        <footer id="footer" className="footer">
+          <div className="container">
+            <p><span>{t.footer}</span></p>
+          </div>
+        </footer>
+      </div>
+    </>
   )
 }
 
@@ -183,7 +223,8 @@ function DropdownSimulator({ t }) {
   const [show, setShow] = useState(false);
   return (
     <div>
-      <button className="btn btn-primary" onClick={() => setShow(s => !s)}>
+      <button className="btn btn-primary" aria-label={show ? t.dropdownHide : t.dropdownShow} onClick={() => setShow(s => !s)}>
+        <span className="btn-icon" role="img" aria-label="dropdown">{show ? '▲' : '▼'}</span>
         <span>{show ? t.dropdownHide : t.dropdownShow}</span>
       </button>
       {show && (
@@ -203,7 +244,8 @@ function TextLinesToggle({ t }) {
   const [show, setShow] = useState(false);
   return (
     <div>
-      <button className="btn btn-secondary" onClick={() => setShow(s => !s)}>
+      <button className="btn btn-secondary" aria-label={show ? t.textHide : t.textShow} onClick={() => setShow(s => !s)}>
+        <span className="btn-icon" role="img" aria-label="toggle-text">{show ? '🙈' : '📝'}</span>
         <span>{show ? t.textHide : t.textShow}</span>
       </button>
       {show && (
@@ -222,7 +264,8 @@ function TextLinesToggle({ t }) {
 function ClickCounter({ t }) {
   const [count, setCount] = useState(0);
   return (
-    <button className="btn btn-primary" onClick={() => setCount(c => c + 1)}>
+    <button className="btn btn-primary" aria-label="Click counter" onClick={() => setCount(c => c + 1)}>
+      <span className="btn-icon" role="img" aria-label="click">🖱️</span>
       <span>{t.click} {count} {t.times}</span>
     </button>
   );
@@ -235,8 +278,10 @@ function ColorToggleButton({ t }) {
   return (
     <button
       className={on ? 'btn btn-secondary' : 'btn btn-primary'}
+      aria-label="Toggle Martian color"
       onClick={() => setOn(o => !o)}
     >
+      <span className="btn-icon" role="img" aria-label="color">🎨</span>
       <span>{on ? t.martianGreen : t.martianRed}</span>
     </button>
   );
