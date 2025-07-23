@@ -118,7 +118,7 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang((l: 'EN' | 'RU') => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang((l) => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>
         </button>
@@ -200,6 +200,8 @@ function App() {
               <ClickCounter t={t} />
               {/* Color toggle button */}
               <ColorToggleButton t={t} />
+              {/* New alien message display */}
+              <AlienMessageDisplay t={t} />
             </div>
           </div>
         </section>
@@ -284,5 +286,45 @@ function ColorToggleButton({ t }) {
       <span className="btn-icon" role="img" aria-label="color">🎨</span>
       <span>{on ? t.martianGreen : t.martianRed}</span>
     </button>
+  );
+}
+
+// AlienMessageDisplay: shows random alien messages
+/** @param {{ t: Translation }} props */
+function AlienMessageDisplay() {
+  const [message, setMessage] = useState('');
+  const alienMessages = [
+    '👽 ACK ACK ACK!',
+    '🛸 PREPARING INVASION...',
+    '⚡ DEATH RAY CHARGING...',
+    '🧠 BRAIN SCAN COMPLETE',
+    '🌍 EARTH COORDINATES LOCKED'
+  ];
+  
+  const showRandomMessage = () => {
+    const randomMsg = alienMessages[Math.floor(Math.random() * alienMessages.length)];
+    setMessage(randomMsg);
+    setTimeout(() => setMessage(''), 3000);
+  };
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <button className="btn btn-primary" aria-label="Show alien message" onClick={showRandomMessage}>
+        <span className="btn-icon" role="img" aria-label="alien">👽</span>
+        <span>ALIEN TRANSMISSION</span>
+      </button>
+      {message && (
+        <div style={{ 
+          marginTop: '1rem', 
+          color: '#ff0000', 
+          fontSize: '1.5rem', 
+          fontWeight: 'bold',
+          textShadow: '0 0 10px #ff0000',
+          animation: 'textGlow 1s ease-in-out infinite alternate'
+        }}>
+          <span>{message}</span>
+        </div>
+      )}
+    </div>
   );
 }
