@@ -34,7 +34,7 @@ import './App.css'
  */
 
 /** @type {{ EN: Translation, RU: Translation }} */
-const translations = {
+const translations: { EN: Translation; RU: Translation } = {
   EN: {
     heroTitle: 'MARS ATTACKS!',
     heroSubtitle: 'THE INVASION HAS BEGUN • RESISTANCE IS FUTILE • WELCOME YOUR NEW OVERLORDS',
@@ -98,26 +98,25 @@ const translations = {
 };
 
 function App() {
-  const [lang, setLang] = useState('EN');
-  /** @type {Translation} */
-  const t = translations[lang];
+  const [lang, setLang] = useState<'EN' | 'RU'>('EN');
+  const t: Translation = translations[lang];
   return (
     <div className="mars-landing">
-      <button className="lang-switch-btn" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
-        {t.lang}
+      <button className="lang-switch-btn" onClick={( ) => setLang((l: 'EN' | 'RU') => l === 'EN' ? 'RU' : 'EN')}>
+        <span>{t.lang}</span>
       </button>
       {/* Hero Section */}
       <section className="hero">
         <div className="alien-overlay"></div>
         <div className="hero-content">
           <div className="ufo">🛸</div>
-          <h1 className="hero-title">{t.heroTitle}</h1>
+          <h1 className="hero-title"><span>{t.heroTitle}</span></h1>
           <p className="hero-subtitle">
-            {t.heroSubtitle}
+            <span>{t.heroSubtitle}</span>
           </p>
           <div className="hero-buttons">
-            <button className="btn btn-primary">{t.join}</button>
-            <button className="btn btn-secondary">{t.surrender}</button>
+            <button className="btn btn-primary"><span>{t.join}</span></button>
+            <button className="btn btn-secondary"><span>{t.surrender}</span></button>
           </div>
         </div>
         <div className="mars-bg"></div>
@@ -126,22 +125,22 @@ function App() {
       {/* Features Section */}
       <section className="features">
         <div className="container">
-          <h2 className="section-title">{t.featuresTitle}</h2>
+          <h2 className="section-title"><span>{t.featuresTitle}</span></h2>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">👽</div>
-              <h3>{t.brain}</h3>
-              <p>{t.brainDesc}</p>
+              <h3><span>{t.brain}</span></h3>
+              <p><span>{t.brainDesc}</span></p>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🛸</div>
-              <h3>{t.rays}</h3>
-              <p>{t.raysDesc}</p>
+              <h3><span>{t.rays}</span></h3>
+              <p><span>{t.raysDesc}</span></p>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🔴</div>
-              <h3>{t.mind}</h3>
-              <p>{t.mindDesc}</p>
+              <h3><span>{t.mind}</span></h3>
+              <p><span>{t.mindDesc}</span></p>
             </div>
           </div>
         </div>
@@ -150,7 +149,7 @@ function App() {
       {/* Interactive Test Section */}
       <section className="features">
         <div className="container">
-          <h2 className="section-title">{t.testZone}</h2>
+          <h2 className="section-title"><span>{t.testZone}</span></h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', marginTop: '2rem' }}>
             {/* Dropdown simulation */}
             <DropdownSimulator t={t} />
@@ -167,7 +166,7 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>{t.footer}</p>
+          <p><span>{t.footer}</span></p>
         </div>
       </footer>
     </div>
@@ -183,13 +182,13 @@ function DropdownSimulator({ t }) {
   return (
     <div>
       <button className="btn btn-primary" onClick={() => setShow(s => !s)}>
-        {show ? t.dropdownHide : t.dropdownShow}
+        <span>{show ? t.dropdownHide : t.dropdownShow}</span>
       </button>
       {show && (
         <select style={{ marginLeft: '1rem', padding: '0.5rem', fontSize: '1rem' }}>
-          <option>{t.martian}</option>
-          <option>{t.venusian}</option>
-          <option>{t.earthling}</option>
+          <option><span>{t.martian}</span></option>
+          <option><span>{t.venusian}</span></option>
+          <option><span>{t.earthling}</span></option>
         </select>
       )}
     </div>
@@ -203,13 +202,13 @@ function TextLinesToggle({ t }) {
   return (
     <div>
       <button className="btn btn-secondary" onClick={() => setShow(s => !s)}>
-        {show ? t.textHide : t.textShow}
+        <span>{show ? t.textHide : t.textShow}</span>
       </button>
       {show && (
         <div style={{ marginTop: '0.5rem', color: '#ffff00', textAlign: 'left' }}>
-          <div>{t.line1}</div>
-          <div>{t.line2}</div>
-          <div>{t.line3}</div>
+          <div><span>{t.line1}</span></div>
+          <div><span>{t.line2}</span></div>
+          <div><span>{t.line3}</span></div>
         </div>
       )}
     </div>
@@ -222,7 +221,7 @@ function ClickCounter({ t }) {
   const [count, setCount] = useState(0);
   return (
     <button className="btn btn-primary" onClick={() => setCount(c => c + 1)}>
-      {t.click} {count} {t.times}
+      <span>{t.click} {count} {t.times}</span>
     </button>
   );
 }
@@ -236,7 +235,7 @@ function ColorToggleButton({ t }) {
       className={on ? 'btn btn-secondary' : 'btn btn-primary'}
       onClick={() => setOn(o => !o)}
     >
-      {on ? t.martianGreen : t.martianRed}
+      <span>{on ? t.martianGreen : t.martianRed}</span>
     </button>
   );
 }
