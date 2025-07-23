@@ -335,3 +335,18 @@ html, body, #root {
     font-size: 3rem;
   }
 }
+
+/* White background for all clickable elements */
+button, .btn, .lang-switch-btn, a, select {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+button:hover, .btn:hover, .lang-switch-btn:hover, a:hover, select:hover {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+button:focus, .btn:focus, .lang-switch-btn:focus, a:focus, select:focus {
+  background-color: #fff !important;
+  color: #000 !important;
+  outline: 2px solid #000;
+}
