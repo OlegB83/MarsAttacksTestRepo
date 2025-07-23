@@ -39,7 +39,7 @@ html, body, #root {
   align-items: center;
 }
 .nav-links a {
-  color: #ffff00;
+  color: #d4af37;
   font-weight: bold;
   text-decoration: none;
   font-size: 1.1rem;
@@ -48,9 +48,9 @@ html, body, #root {
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .nav-links a:hover, .nav-links a:focus {
-  background: #ff0000;
+  background: #cc4444;
   color: #fff;
-  box-shadow: 0 0 8px #ff0000;
+  box-shadow: 0 0 4px #cc4444;
 }
 @media (max-width: 768px) {
   .main-nav {
@@ -103,28 +103,28 @@ html, body, #root {
   color: #fff;
   margin-bottom: 2rem;
   opacity: 0.85;
-  text-shadow: 0 0 8px #000, 0 0 2px #ff0;
+  text-shadow: 0 0 4px #000, 0 0 1px #d4af37;
   font-style: italic;
 }
 .hero-cta {
   margin-top: 2rem;
   font-size: 1.3rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #ff0000 0%, #ffff00 100%);
+  background: linear-gradient(90deg, #cc4444 0%, #d4af37 100%);
   color: #000;
   border: none;
   border-radius: 2rem;
   padding: 1.2rem 3rem;
-  box-shadow: 0 0 30px #ff0000, 0 0 10px #ffff00;
+  box-shadow: 0 0 15px #cc4444, 0 0 5px #d4af37;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   cursor: pointer;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .hero-cta:hover, .hero-cta:focus {
-  background: linear-gradient(90deg, #ffff00 0%, #ff0000 100%);
-  color: #ff0000;
-  box-shadow: 0 0 40px #ffff00, 0 0 20px #ff0000;
+  background: linear-gradient(90deg, #d4af37 0%, #cc4444 100%);
+  color: #cc4444;
+  box-shadow: 0 0 20px #d4af37, 0 0 10px #cc4444;
   transform: scale(1.05);
 }
 
@@ -135,14 +135,14 @@ html, body, #root {
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.2) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(204, 68, 68, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(74, 144, 73, 0.15) 0%, transparent 50%);
   animation: alienPulse 3s ease-in-out infinite alternate;
 }
 
 @keyframes alienPulse {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.7; }
+  0% { opacity: 0.2; }
+  100% { opacity: 0.4; }
 }
 
 .mars-bg {
@@ -156,7 +156,7 @@ html, body, #root {
       90deg,
       transparent,
       transparent 98px,
-      rgba(255, 0, 0, 0.1) 100px
+      rgba(204, 68, 68, 0.05) 100px
     );
   animation: scanlines 2s linear infinite;
 }
@@ -189,17 +189,17 @@ html, body, #root {
   margin-bottom: 1rem;
   line-height: 1.2;
   text-shadow: 
-    0 0 10px #00ff00,
-    0 0 20px #00ff00,
-    0 0 30px #00ff00,
-    0 0 40px #ff0000;
+    0 0 5px #4a9049,
+    0 0 10px #4a9049,
+    0 0 15px #4a9049,
+    0 0 20px #cc4444;
   animation: textGlow 2s ease-in-out infinite alternate;
   letter-spacing: 0.1em;
 }
 
 @keyframes textGlow {
-  0% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; }
-  100% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000; }
+  0% { text-shadow: 0 0 5px #4a9049, 0 0 10px #4a9049, 0 0 15px #4a9049; }
+  100% { text-shadow: 0 0 10px #cc4444, 0 0 15px #cc4444, 0 0 20px #cc4444; }
 }
 
 .hero-subtitle {
@@ -207,8 +207,8 @@ html, body, #root {
   margin-bottom: 2rem;
   opacity: 0.9;
   line-height: 1.6;
-  color: #ffff00;
-  text-shadow: 0 0 5px #ffff00;
+  color: #d4af37;
+  text-shadow: 0 0 3px #d4af37;
   letter-spacing: 0.05em;
 }
 
@@ -237,39 +237,39 @@ html, body, #root {
 }
 
 .btn-primary {
-  background-color: #ff0000;
-  color: #ffff00;
-  border-color: #ffff00;
-  box-shadow: 0 0 20px #ff0000;
+  background-color: #cc4444;
+  color: #d4af37;
+  border-color: #d4af37;
+  box-shadow: 0 0 10px #cc4444;
 }
 
 .btn-primary:hover {
-  background-color: #ffff00;
-  color: #ff0000;
-  border-color: #ff0000;
-  box-shadow: 0 0 30px #ffff00;
+  background-color: #d4af37;
+  color: #cc4444;
+  border-color: #cc4444;
+  box-shadow: 0 0 15px #d4af37;
   transform: scale(1.05);
 }
 
 .btn-secondary {
   background-color: transparent;
-  color: #00ff00;
-  border-color: #00ff00;
-  box-shadow: 0 0 20px #00ff00;
+  color: #4a9049;
+  border-color: #4a9049;
+  box-shadow: 0 0 10px #4a9049;
 }
 
 .btn-secondary:hover {
-  background-color: #00ff00;
+  background-color: #4a9049;
   color: #000;
-  border-color: #00ff00;
-  box-shadow: 0 0 30px #00ff00;
+  border-color: #4a9049;
+  box-shadow: 0 0 15px #4a9049;
   transform: scale(1.05);
 }
 
 /* Features Section */
 .features {
   padding: 4rem 2rem;
-  background: linear-gradient(45deg, #000 25%, #1a0033 25%, #1a0033 50%, #000 50%, #000 75%, #1a0033 75%);
+  background: linear-gradient(45deg, #000 25%, #1a1a1a 25%, #1a1a1a 50%, #000 50%, #000 75%, #1a1a1a 75%);
   background-size: 40px 40px;
   animation: backgroundMove 10s linear infinite;
 }
@@ -283,11 +283,11 @@ html, body, #root {
   text-align: center;
   font-size: 3rem;
   margin-bottom: 3rem;
-  color: #ff0000;
+  color: #cc4444;
   text-shadow: 
-    0 0 10px #ff0000,
-    0 0 20px #ff0000,
-    0 0 30px #ff0000;
+    0 0 5px #cc4444,
+    0 0 10px #cc4444,
+    0 0 15px #cc4444;
   letter-spacing: 0.2em;
   font-weight: 900;
 }
@@ -302,11 +302,11 @@ html, body, #root {
 
 /* Feature Card Enhancements */
 .feature-card {
-  background: linear-gradient(135deg, #001100 0%, #003300 100%);
+  background: linear-gradient(135deg, #1a2d1a 0%, #2a4a2a 100%);
   padding: 2rem;
-  border: 3px solid #00ff00;
+  border: 3px solid #4a9049;
   text-align: center;
-  box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 10px #4a9049, inset 0 0 10px rgba(74, 144, 73, 0.05);
   transition: all 0.3s cubic-bezier(.4,2,.6,1);
   position: relative;
   overflow: hidden;
@@ -318,7 +318,7 @@ html, body, #root {
 }
 .feature-card:hover {
   transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 0 40px #00ff00, 0 8px 40px #00ff00, inset 0 0 30px rgba(0, 255, 0, 0.2);
+  box-shadow: 0 0 20px #4a9049, 0 8px 20px #4a9049, inset 0 0 15px rgba(74, 144, 73, 0.1);
   z-index: 2;
 }
 .feature-card .feature-icon {
@@ -331,23 +331,23 @@ html, body, #root {
 }
 .feature-card .learn-more {
   margin-top: 1.5rem;
-  background: #00ff00;
-  color: #003300;
+  background: #4a9049;
+  color: #1a2d1a;
   border: none;
   border-radius: 1rem;
   padding: 0.7rem 2rem;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 0 10px #00ff00;
+  box-shadow: 0 0 5px #4a9049;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 .feature-card .learn-more:hover, .feature-card .learn-more:focus {
-  background: #003300;
-  color: #00ff00;
-  box-shadow: 0 0 20px #00ff00;
+  background: #1a2d1a;
+  color: #4a9049;
+  box-shadow: 0 0 10px #4a9049;
   transform: scale(1.07);
 }
 
@@ -358,7 +358,7 @@ html, body, #root {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, #ff0000, #00ff00, #ffff00, #ff0000);
+  background: linear-gradient(45deg, #cc4444, #4a9049, #d4af37, #cc4444);
   z-index: -1;
   animation: borderRotate 3s linear infinite;
 }
@@ -382,26 +382,26 @@ html, body, #root {
 .feature-card h3 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: #ffff00;
-  text-shadow: 0 0 10px #ffff00;
+  color: #d4af37;
+  text-shadow: 0 0 5px #d4af37;
   letter-spacing: 0.1em;
   font-weight: 900;
 }
 
 .feature-card p {
-  color: #00ff00;
+  color: #4a9049;
   line-height: 1.6;
-  text-shadow: 0 0 5px #00ff00;
+  text-shadow: 0 0 3px #4a9049;
 }
 
 /* Footer */
 .footer {
-  background: linear-gradient(90deg, #000 0%, #330011 50%, #000 100%);
-  color: #00ff00;
+  background: linear-gradient(90deg, #000 0%, #2a1a1a 50%, #000 100%);
+  color: #4a9049;
   padding: 2rem;
   text-align: center;
-  border-top: 3px solid #ff0000;
-  text-shadow: 0 0 5px #00ff00;
+  border-top: 3px solid #cc4444;
+  text-shadow: 0 0 3px #4a9049;
   letter-spacing: 0.05em;
 }
 
@@ -411,19 +411,19 @@ html, body, #root {
   top: 1.5rem;
   right: 2rem;
   z-index: 1000;
-  background: #330011;
-  color: #ffff00;
-  border: 2px solid #ff0000;
+  background: #2a1a1a;
+  color: #d4af37;
+  border: 2px solid #cc4444;
   padding: 0.7rem 1.5rem;
   font-size: 1.1rem;
   font-weight: bold;
   border-radius: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 0 10px #ff0000;
+  box-shadow: 0 0 5px #cc4444;
   transition: background 0.2s, color 0.2s;
 }
 .lang-switch-btn:hover {
-  background: #ff0000;
+  background: #cc4444;
   color: #fff;
 }
 
