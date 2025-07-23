@@ -34,7 +34,7 @@ import './App.css'
  */
 
 /** @type {{ EN: Translation, RU: Translation }} */
-const translations: { EN: Translation; RU: Translation } = {
+const translations = {
   EN: {
     heroTitle: 'MARS ATTACKS!',
     heroSubtitle: 'THE INVASION HAS BEGUN • RESISTANCE IS FUTILE • WELCOME YOUR NEW OVERLORDS',
@@ -98,11 +98,13 @@ const translations: { EN: Translation; RU: Translation } = {
 };
 
 function App() {
-  const [lang, setLang] = useState<'EN' | 'RU'>('EN');
-  const t: Translation = translations[lang];
+  /** @type {['EN' | 'RU', Function]} */
+  const [lang, setLang] = useState('EN');
+  /** @type {Translation} */
+  const t = translations[lang];
   return (
     <div className="mars-landing">
-      <button className="lang-switch-btn" onClick={( ) => setLang((l: 'EN' | 'RU') => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" onClick={() => setLang(l /* 'EN' | 'RU' */ => l === 'EN' ? 'RU' : 'EN')}>
         <span>{t.lang}</span>
       </button>
       {/* Hero Section */}
