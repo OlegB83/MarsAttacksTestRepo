@@ -481,6 +481,56 @@ html, body, #root {
   }
 }
 
+/* New button animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.emergency-active {
+  animation: pulse 0.5s infinite !important;
+  box-shadow: 0 0 30px #ff0000 !important;
+}
+
+/* Weapon selector animations */
+@keyframes weaponGlow {
+  0% { box-shadow: 0 0 20px #ff0000; }
+  50% { box-shadow: 0 0 30px #ffff00; }
+  100% { box-shadow: 0 0 20px #ff0000; }
+}
+
+.weapon-active {
+  animation: weaponGlow 2s ease-in-out infinite;
+}
+
+/* Mission briefing styles */
+.mission-briefing-content {
+  background: rgba(255, 0, 0, 0.1);
+  border: 2px solid #ff0000;
+  border-radius: 0.5rem;
+  color: #ff0000;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff0000;
+  animation: briefingFlicker 1.5s ease-in-out infinite;
+}
+
+@keyframes briefingFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Alien communication styles */
+.alien-comm-active {
+  background: rgba(0, 255, 0, 0.1);
+  border: 2px solid #00ff00;
+  border-radius: 0.5rem;
+  color: #00ff00;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff00;
+  animation: alienPulse 2s ease-in-out infinite;
+}
+
 @media (max-width: 600px) {
   .main-nav {
     flex-direction: column;

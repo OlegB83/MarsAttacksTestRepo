@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css'
 import reactLogo from './assets/react.svg';
 
@@ -30,6 +30,20 @@ import reactLogo from './assets/react.svg';
  * @property {string} times
  * @property {string} martianRed
  * @property {string} martianGreen
+ * @property {string} weaponSelect
+ * @property {string} missionBrief
+ * @property {string} alienComm
+ * @property {string} activate
+ * @property {string} deactivate
+ * @property {string} laserCannon
+ * @property {string} plasmaBomb
+ * @property {string} mindRay
+ * @property {string} briefingActive
+ * @property {string} briefingInactive
+ * @property {string} commActive
+ * @property {string} commInactive
+ * @property {string} emergency
+ * @property {string} evacuate
  * @property {string} footer
  * @property {string} lang
  */
@@ -63,6 +77,21 @@ const translations = {
     times: 'times',
     martianRed: 'Martian Red',
     martianGreen: 'Martian Green',
+    // New button translations
+    weaponSelect: 'SELECT WEAPON',
+    missionBrief: 'MISSION BRIEFING',
+    alienComm: 'ALIEN COMMUNICATION',
+    activate: 'ACTIVATE',
+    deactivate: 'DEACTIVATE',
+    laserCannon: 'Laser Cannon',
+    plasmaBomb: 'Plasma Bomb',
+    mindRay: 'Mind Ray',
+    briefingActive: 'Mission: Destroy Earth Defense',
+    briefingInactive: 'Click to receive orders',
+    commActive: 'ACK ACK! We come in peace... to destroy you!',
+    commInactive: 'Establish alien contact',
+    emergency: 'EMERGENCY EVACUATION',
+    evacuate: 'EVACUATE NOW!',
     footer: 'ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION',
     lang: 'RU'
   },
@@ -93,6 +122,21 @@ const translations = {
     times: '',
     martianRed: 'Марсианский Красный',
     martianGreen: 'Марсианский Зелёный',
+    // New button translations
+    weaponSelect: 'ВЫБОР ОРУЖИЯ',
+    missionBrief: 'БРИФИНГ МИССИИ',
+    alienComm: 'СВЯЗЬ С ПРИШЕЛЬЦАМИ',
+    activate: 'АКТИВИРОВАТЬ',
+    deactivate: 'ДЕАКТИВИРОВАТЬ',
+    laserCannon: 'Лазерная Пушка',
+    plasmaBomb: 'Плазменная Бомба',
+    mindRay: 'Луч Разума',
+    briefingActive: 'Миссия: Уничтожить защиту Земли',
+    briefingInactive: 'Кликните для получения приказов',
+    commActive: 'АК АК! Мы пришли с миром... чтобы вас уничтожить!',
+    commInactive: 'Установить контакт с пришельцами',
+    emergency: 'ЭКСТРЕННАЯ ЭВАКУАЦИЯ',
+    evacuate: 'ЭВАКУАЦИЯ СЕЙЧАС!',
     footer: 'АК АК АК! • ИМПЕРИЯ МАРСА © 2024 • ВСЕ ЛЮДИ ЗАРЕЗЕРВИРОВАНЫ ДЛЯ ЭКСПЕРИМЕНТОВ',
     lang: 'EN'
   }
@@ -155,6 +199,8 @@ function App() {
               <button className="btn btn-primary" aria-label="Join the invasion"><span className="btn-icon" role="img" aria-label="join">🚀</span><span>{t.join}</span></button>
               <button className="btn btn-secondary" aria-label="Surrender now"><span className="btn-icon" role="img" aria-label="surrender">🕊️</span><span>{t.surrender}</span></button>
               <button className="hero-cta"><span>Start Your Adventure</span></button>
+              {/* New hero buttons */}
+              <EmergencyButton t={t} />
             </div>
           </div>
           <div className="mars-bg"></div>
@@ -200,6 +246,10 @@ function App() {
               <ClickCounter t={t} />
               {/* Color toggle button */}
               <ColorToggleButton t={t} />
+              {/* New interactive buttons */}
+              <WeaponSelector t={t} />
+              <MissionBriefing t={t} />
+              <AlienCommunication t={t} />
             </div>
           </div>
         </section>
@@ -284,5 +334,129 @@ function ColorToggleButton({ t }) {
       <span className="btn-icon" role="img" aria-label="color">🎨</span>
       <span>{on ? t.martianGreen : t.martianRed}</span>
     </button>
+  );
+}
+
+// EmergencyButton: emergency evacuation button in hero section
+/** @param {{ t: Translation }} props */
+function EmergencyButton({ t }) {
+  const [activated, setActivated] = useState(false);
+  
+  const handleClick = () => {
+    setActivated(true);
+    setTimeout(() => setActivated(false), 3000); // Reset after 3 seconds
+  };
+  
+  return (
+    <button 
+      className={activated ? 'btn btn-secondary emergency-active' : 'btn btn-primary'}
+      aria-label="Emergency evacuation"
+      onClick={handleClick}
+      style={{ 
+        animation: activated ? 'pulse 0.5s infinite' : 'none',
+        marginTop: '1rem'
+      }}
+    >
+      <span className="btn-icon" role="img" aria-label="emergency">🚨</span>
+      <span>{activated ? t.evacuate : t.emergency}</span>
+    </button>
+  );
+}
+
+// WeaponSelector: cycles through different alien weapons
+/** @param {{ t: Translation }} props */
+function WeaponSelector({ t }) {
+  const weapons = [t.laserCannon, t.plasmaBomb, t.mindRay];
+  const weaponIcons = ['🔫', '💣', '🧠'];
+  const [currentWeapon, setCurrentWeapon] = useState(0);
+  
+  const selectNextWeapon = () => {
+    setCurrentWeapon(prev => (prev + 1) % weapons.length);
+  };
+  
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <button className="btn btn-primary" aria-label="Select weapon" onClick={selectNextWeapon}>
+        <span className="btn-icon" role="img" aria-label="weapon">{weaponIcons[currentWeapon]}</span>
+        <span>{t.weaponSelect}</span>
+      </button>
+      <div style={{ marginTop: '0.5rem', color: '#ffff00', fontSize: '1.1rem', fontWeight: 'bold' }}>
+        <span>{weapons[currentWeapon]}</span>
+      </div>
+    </div>
+  );
+}
+
+// MissionBriefing: toggles mission briefing display
+/** @param {{ t: Translation }} props */
+function MissionBriefing({ t }) {
+  const [showBriefing, setShowBriefing] = useState(false);
+  
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <button 
+        className={showBriefing ? 'btn btn-secondary' : 'btn btn-primary'}
+        aria-label="Mission briefing"
+        onClick={() => setShowBriefing(prev => !prev)}
+      >
+        <span className="btn-icon" role="img" aria-label="briefing">📋</span>
+        <span>{t.missionBrief}</span>
+      </button>
+      {showBriefing && (
+        <div style={{ 
+          marginTop: '1rem', 
+          padding: '1rem', 
+          backgroundColor: 'rgba(255, 0, 0, 0.1)', 
+          border: '2px solid #ff0000',
+          borderRadius: '0.5rem',
+          color: '#ff0000',
+          fontWeight: 'bold',
+          textShadow: '0 0 5px #ff0000'
+        }}>
+          <span>{t.briefingActive}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// AlienCommunication: activates alien communication mode
+/** @param {{ t: Translation }} props */
+function AlienCommunication({ t }) {
+  const [communicating, setCommunicating] = useState(false);
+  
+  const toggleCommunication = () => {
+    setCommunicating(prev => !prev);
+  };
+  
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <button 
+        className={communicating ? 'btn btn-secondary' : 'btn btn-primary'}
+        aria-label="Alien communication"
+        onClick={toggleCommunication}
+        style={{
+          boxShadow: communicating ? '0 0 20px #00ff00' : '0 0 20px #ff0000'
+        }}
+      >
+        <span className="btn-icon" role="img" aria-label="communication">👽</span>
+        <span>{t.alienComm}</span>
+      </button>
+      {communicating && (
+        <div style={{ 
+          marginTop: '1rem', 
+          padding: '1rem',
+          backgroundColor: 'rgba(0, 255, 0, 0.1)',
+          border: '2px solid #00ff00',
+          borderRadius: '0.5rem',
+          color: '#00ff00',
+          fontWeight: 'bold',
+          textShadow: '0 0 5px #00ff00',
+          animation: 'alienPulse 2s ease-in-out infinite'
+        }}>
+          <span>{t.commActive}</span>
+        </div>
+      )}
+    </div>
   );
 }
