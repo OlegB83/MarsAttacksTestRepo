@@ -83,16 +83,13 @@ html, body, #root {
   padding: 0 2rem;
 }
 
-/* Hero Section Animation: Animated Stars */
+/* Hero Section */
 .hero {
   position: relative;
   overflow: hidden;
 }
 .hero-bg-anim {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 .hero-content {
   position: relative;
@@ -110,22 +107,21 @@ html, body, #root {
   margin-top: 2rem;
   font-size: 1.3rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #ff0000 0%, #ffff00 100%);
-  color: #000;
-  border: none;
+  background: #ff0000;
+  color: #ffff00;
+  border: 2px solid #ffff00;
   border-radius: 2rem;
   padding: 1.2rem 3rem;
-  box-shadow: 0 0 30px #ff0000, 0 0 10px #ffff00;
+  box-shadow: 0 0 10px #ff0000;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 .hero-cta:hover, .hero-cta:focus {
-  background: linear-gradient(90deg, #ffff00 0%, #ff0000 100%);
+  background: #ffff00;
   color: #ff0000;
-  box-shadow: 0 0 40px #ffff00, 0 0 20px #ff0000;
-  transform: scale(1.05);
+  border-color: #ff0000;
 }
 
 .alien-overlay {
@@ -135,14 +131,8 @@ html, body, #root {
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.2) 0%, transparent 50%);
-  animation: alienPulse 3s ease-in-out infinite alternate;
-}
-
-@keyframes alienPulse {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.7; }
+    radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.3) 0%, transparent 50%);
 }
 
 .mars-bg {
@@ -158,12 +148,6 @@ html, body, #root {
       transparent 98px,
       rgba(255, 0, 0, 0.1) 100px
     );
-  animation: scanlines 2s linear infinite;
-}
-
-@keyframes scanlines {
-  0% { transform: translateY(-100px); }
-  100% { transform: translateY(100px); }
 }
 
 .hero-content {
@@ -174,14 +158,8 @@ html, body, #root {
 
 .ufo {
   font-size: 4rem;
-  animation: float 3s ease-in-out infinite;
   display: block;
   margin-bottom: 1rem;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
 }
 
 .hero-title {
@@ -191,15 +169,8 @@ html, body, #root {
   text-shadow: 
     0 0 10px #00ff00,
     0 0 20px #00ff00,
-    0 0 30px #00ff00,
-    0 0 40px #ff0000;
-  animation: textGlow 2s ease-in-out infinite alternate;
+    0 0 30px #00ff00;
   letter-spacing: 0.1em;
-}
-
-@keyframes textGlow {
-  0% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; }
-  100% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000; }
 }
 
 .hero-subtitle {
@@ -240,30 +211,26 @@ html, body, #root {
   background-color: #ff0000;
   color: #ffff00;
   border-color: #ffff00;
-  box-shadow: 0 0 20px #ff0000;
+  box-shadow: 0 0 10px #ff0000;
 }
 
 .btn-primary:hover {
   background-color: #ffff00;
   color: #ff0000;
   border-color: #ff0000;
-  box-shadow: 0 0 30px #ffff00;
-  transform: scale(1.05);
 }
 
 .btn-secondary {
   background-color: transparent;
   color: #00ff00;
   border-color: #00ff00;
-  box-shadow: 0 0 20px #00ff00;
+  box-shadow: 0 0 10px #00ff00;
 }
 
 .btn-secondary:hover {
   background-color: #00ff00;
   color: #000;
   border-color: #00ff00;
-  box-shadow: 0 0 30px #00ff00;
-  transform: scale(1.05);
 }
 
 /* Features Section */
@@ -271,12 +238,6 @@ html, body, #root {
   padding: 4rem 2rem;
   background: linear-gradient(45deg, #000 25%, #1a0033 25%, #1a0033 50%, #000 50%, #000 75%, #1a0033 75%);
   background-size: 40px 40px;
-  animation: backgroundMove 10s linear infinite;
-}
-
-@keyframes backgroundMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 40px 40px; }
 }
 
 .section-title {
@@ -306,8 +267,8 @@ html, body, #root {
   padding: 2rem;
   border: 3px solid #00ff00;
   text-align: center;
-  box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
-  transition: all 0.3s cubic-bezier(.4,2,.6,1);
+  box-shadow: 0 0 10px #00ff00, inset 0 0 10px rgba(0, 255, 0, 0.1);
+  transition: box-shadow 0.3s;
   position: relative;
   overflow: hidden;
   border-radius: 1.2rem;
@@ -317,14 +278,11 @@ html, body, #root {
   align-items: center;
 }
 .feature-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 0 40px #00ff00, 0 8px 40px #00ff00, inset 0 0 30px rgba(0, 255, 0, 0.2);
-  z-index: 2;
+  box-shadow: 0 0 20px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.2);
 }
 .feature-card .feature-icon {
   font-size: 4rem;
   margin-bottom: 1rem;
-  animation: iconBounce 2s ease-in-out infinite;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -339,44 +297,22 @@ html, body, #root {
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 0 10px #00ff00;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition: background 0.2s, color 0.2s;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 .feature-card .learn-more:hover, .feature-card .learn-more:focus {
   background: #003300;
   color: #00ff00;
-  box-shadow: 0 0 20px #00ff00;
-  transform: scale(1.07);
 }
 
 .feature-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #ff0000, #00ff00, #ffff00, #ff0000);
-  z-index: -1;
-  animation: borderRotate 3s linear infinite;
-}
-
-@keyframes borderRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  display: none;
 }
 
 .feature-icon {
   font-size: 4rem;
   margin-bottom: 1rem;
-  animation: iconBounce 2s ease-in-out infinite;
-}
-
-@keyframes iconBounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
 }
 
 .feature-card h3 {
@@ -432,15 +368,10 @@ html, body, #root {
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
-  transition: all 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.btn:active, .lang-switch-btn:active {
-  transform: scale(0.97);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: background 0.2s, color 0.2s;
 }
 .btn-primary, .btn-secondary, .lang-switch-btn {
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 .btn .btn-icon, .lang-switch-btn .btn-icon {
   display: inline-flex;
