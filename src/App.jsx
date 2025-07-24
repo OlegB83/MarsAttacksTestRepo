@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css'
 import reactLogo from './assets/react.svg';
 
@@ -118,31 +118,13 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang((l) => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>
         </button>
       <div className="mars-landing" id="main-content" role="main">
         {/* Hero Section */}
         <section id="hero" className="hero">
-          {/* Animated stars background */}
-          <svg className="hero-bg-anim" width="100%" height="100%" viewBox="0 0 1440 600" preserveAspectRatio="none">
-            <circle cx="200" cy="100" r="2.5" fill="#fff" opacity="0.7">
-              <animate attributeName="cy" values="100;120;100" dur="3s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="400" cy="200" r="1.5" fill="#ffff00" opacity="0.6">
-              <animate attributeName="cy" values="200;220;200" dur="4s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="800" cy="80" r="2" fill="#ff0000" opacity="0.5">
-              <animate attributeName="cy" values="80;100;80" dur="2.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="1200" cy="300" r="2.2" fill="#00ff00" opacity="0.7">
-              <animate attributeName="cy" values="300;320;300" dur="3.5s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="1000" cy="500" r="1.8" fill="#fff" opacity="0.5">
-              <animate attributeName="cy" values="500;520;500" dur="4.2s" repeatCount="indefinite"/>
-            </circle>
-          </svg>
           <div className="alien-overlay"></div>
           <div className="hero-content">
             <div className="ufo">🛸</div>
