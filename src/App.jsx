@@ -70,7 +70,7 @@ const translations = {
     martianRed: 'Martian Red',
     martianGreen: 'Martian Green',
     explore: 'EXPLORE GALAXY',
-    recruit: 'RECRUIT HUMANS',
+    recruit: 'RECRUIT ANDROIDS',
     launch: 'LAUNCH ATTACK',
     defend: 'DEFEND EARTH',
     negotiate: 'NEGOTIATE PEACE',
