@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css'
 import reactLogo from './assets/react.svg';
 
@@ -118,7 +118,7 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(/** @type {(prev: 'EN' | 'RU') => 'EN' | 'RU'} */ (l) => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>
         </button>
@@ -159,7 +159,6 @@ function App() {
           </div>
           <div className="mars-bg"></div>
         </section>
-        <div className="section-divider" />
         {/* Features Section */}
         <section id="features" className="features">
           <div className="container">
@@ -186,7 +185,6 @@ function App() {
             </div>
           </div>
         </section>
-        <div className="section-divider" />
         {/* Interactive Test Section */}
         <section id="test-zone" className="features">
           <div className="container">
@@ -203,7 +201,6 @@ function App() {
             </div>
           </div>
         </section>
-        <div className="section-divider" />
         {/* Footer */}
         <footer id="footer" className="footer">
           <div className="container">
