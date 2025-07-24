@@ -93,7 +93,7 @@ const translations = {
     times: 'times',
     martianRed: 'Martian Red',
     martianGreen: 'Martian Green',
-    deployArmy: 'Deploy Army',
+    deployArmy: 'Naaah',
     scanEarth: 'Scan Earth',
     launchUfo: 'Launch UFO',
     contactMars: 'Contact Mars',
