@@ -117,7 +117,7 @@ const translations = {
 };
 
 function App() {
-  /** @type {['EN' | 'RU', Function]} */
+  /** @type {[('EN' | 'RU'), React.Dispatch<React.SetStateAction<'EN' | 'RU'>>]} */
   const [lang, setLang] = useState('EN');
   /** @type {Translation} */
   const t = translations[lang];
@@ -136,7 +136,7 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang((l: 'EN' | 'RU') => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>
         </button>
@@ -253,6 +253,7 @@ export default App
 // DropdownSimulator: shows/hides a dropdown list
 /** @param {{ t: Translation }} props */
 function DropdownSimulator({ t }) {
+  /** @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} */
   const [show, setShow] = useState(false);
   return (
     <div>
@@ -274,6 +275,7 @@ function DropdownSimulator({ t }) {
 // TextLinesToggle: shows/hides several text lines
 /** @param {{ t: Translation }} props */
 function TextLinesToggle({ t }) {
+  /** @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} */
   const [show, setShow] = useState(false);
   return (
     <div>
@@ -295,6 +297,7 @@ function TextLinesToggle({ t }) {
 // ClickCounter: button that counts clicks
 /** @param {{ t: Translation }} props */
 function ClickCounter({ t }) {
+  /** @type {[number, React.Dispatch<React.SetStateAction<number>>]} */
   const [count, setCount] = useState(0);
   return (
     <button className="btn btn-primary" aria-label="Click counter" onClick={() => setCount(c => c + 1)}>
@@ -307,6 +310,7 @@ function ClickCounter({ t }) {
 // ColorToggleButton: toggles color on click
 /** @param {{ t: Translation }} props */
 function ColorToggleButton({ t }) {
+  /** @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} */
   const [on, setOn] = useState(false);
   return (
     <button
@@ -323,7 +327,9 @@ function ColorToggleButton({ t }) {
 // ActionButton: interactive mission control button
 /** @param {{ icon: string, label: string, description: string }} props */
 function ActionButton({ icon, label, description }) {
+  /** @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} */
   const [activated, setActivated] = useState(false);
+  /** @type {[boolean, React.Dispatch<React.SetStateAction<boolean>>]} */
   const [loading, setLoading] = useState(false);
   
   const handleClick = () => {
