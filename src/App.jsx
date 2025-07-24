@@ -37,7 +37,7 @@ import reactLogo from './assets/react.svg';
 /** @type {{ EN: Translation, RU: Translation }} */
 const translations = {
   EN: {
-    heroTitle: 'MARS ATTACKS!',
+    heroTitle: 'Attack!',
     heroSubtitle: 'THE INVASION HAS BEGUN • RESISTANCE IS FUTILE • WELCOME YOUR NEW OVERLORDS',
     join: 'JOIN THE INVASION',
     surrender: 'SURRENDER NOW',
