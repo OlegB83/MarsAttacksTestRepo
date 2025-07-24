@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './App.css'
-import reactLogo from './assets/react.svg';
 
 /**
  * @typedef {Object} Translation
@@ -108,7 +107,7 @@ function App() {
       {/* Navigation Bar */}
       <nav className="main-nav" role="navigation" aria-label="Main Navigation">
         <div className="nav-logo">
-          <img src={reactLogo} alt="Logo" style={{ height: '2.5rem', verticalAlign: 'middle' }} />
+          <span style={{ fontSize: '2.5rem', display: 'block' }}>🛸</span>
         </div>
         <ul className="nav-links">
           <li><a href="#hero"><span>Hero</span></a></li>
@@ -118,7 +117,7 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(/** @type {'EN' | 'RU'} */ l => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>
         </button>
