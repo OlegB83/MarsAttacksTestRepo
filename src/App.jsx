@@ -72,7 +72,7 @@ const translations = {
     explore: 'EXPLORE GALAXY',
     recruit: 'RECRUIT HUMANS',
     launch: 'LAUNCH ATTACK',
-    defend: 'DEFEND EARTH',
+    defend: 'Nope',
     negotiate: 'NEGOTIATE PEACE',
     evacuate: 'EVACUATE PLANET',
     footer: 'ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION',
