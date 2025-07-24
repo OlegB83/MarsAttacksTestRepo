@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css'
-import reactLogo from './assets/react.svg';
 
 /**
  * @typedef {Object} Translation
@@ -108,7 +107,7 @@ function App() {
       {/* Navigation Bar */}
       <nav className="main-nav" role="navigation" aria-label="Main Navigation">
         <div className="nav-logo">
-          <img src={reactLogo} alt="Logo" style={{ height: '2.5rem', verticalAlign: 'middle' }} />
+          <span style={{ fontSize: '2.5rem', verticalAlign: 'middle' }}>🛸</span>
         </div>
         <ul className="nav-links">
           <li><a href="#hero"><span>Hero</span></a></li>
