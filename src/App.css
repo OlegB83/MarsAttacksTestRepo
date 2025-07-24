@@ -411,20 +411,22 @@ html, body, #root {
   top: 1.5rem;
   right: 2rem;
   z-index: 1000;
-  background: #330011;
-  color: #ffff00;
-  border: 2px solid #ff0000;
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
   padding: 0.7rem 1.5rem;
   font-size: 1.1rem;
   font-weight: bold;
   border-radius: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 0 10px #ff0000;
-  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
 }
 .lang-switch-btn:hover {
-  background: #ff0000;
-  color: #fff;
+  background: #f0f0f0;
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 /* Improved Button Styles */
@@ -503,14 +505,17 @@ html, body, #root {
 }
 
 .mission-card .btn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
   animation: pulse 1.5s ease-in-out infinite;
+  background-color: #e0e0e0 !important;
+  color: #666 !important;
+  border-color: #ccc !important;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 0.9; }
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.8; }
 }
 
 /* Responsive Design */
@@ -594,19 +599,23 @@ html, body, #root {
   }
 }
 
-/* White background for all clickable elements */
+/* Improved button accessibility and contrast */
 button, .btn, .lang-switch-btn, a, select {
-  background-color: #fff !important;
-  color: #000 !important;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  font-weight: bold;
 }
 button:hover, .btn:hover, .lang-switch-btn:hover, a:hover, select:hover {
-  background-color: #fff !important;
-  color: #000 !important;
+  background-color: #f0f0f0;
+  color: #333;
+  transform: translateY(-1px);
 }
 button:focus, .btn:focus, .lang-switch-btn:focus, a:focus, select:focus {
-  background-color: #fff !important;
-  color: #000 !important;
-  outline: 2px solid #000;
+  background-color: #fff;
+  color: #000;
+  outline: 3px solid #007acc;
+  outline-offset: 2px;
 }
 
 /* Skip Link for Accessibility */

@@ -208,7 +208,7 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang((l: 'EN' | 'RU') => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang((l) => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>
         </button>
