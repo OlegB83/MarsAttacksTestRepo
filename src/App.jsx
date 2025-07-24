@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './App.css'
 import reactLogo from './assets/react.svg';
 
@@ -30,6 +30,12 @@ import reactLogo from './assets/react.svg';
  * @property {string} times
  * @property {string} martianRed
  * @property {string} martianGreen
+ * @property {string} explore
+ * @property {string} recruit
+ * @property {string} launch
+ * @property {string} defend
+ * @property {string} negotiate
+ * @property {string} evacuate
  * @property {string} footer
  * @property {string} lang
  */
@@ -63,6 +69,12 @@ const translations = {
     times: 'times',
     martianRed: 'Martian Red',
     martianGreen: 'Martian Green',
+    explore: 'EXPLORE GALAXY',
+    recruit: 'RECRUIT HUMANS',
+    launch: 'LAUNCH ATTACK',
+    defend: 'DEFEND EARTH',
+    negotiate: 'NEGOTIATE PEACE',
+    evacuate: 'EVACUATE PLANET',
     footer: 'ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION',
     lang: 'RU'
   },
@@ -93,6 +105,12 @@ const translations = {
     times: '',
     martianRed: 'Марсианский Красный',
     martianGreen: 'Марсианский Зелёный',
+    explore: 'ИССЛЕДОВАТЬ ГАЛАКТИКУ',
+    recruit: 'ЗАВЕРБОВАТЬ ЛЮДЕЙ',
+    launch: 'ЗАПУСТИТЬ АТАКУ',
+    defend: 'ЗАЩИТИТЬ ЗЕМЛЮ',
+    negotiate: 'ДОГОВОРИТЬСЯ О МИРЕ',
+    evacuate: 'ЭВАКУИРОВАТЬ ПЛАНЕТУ',
     footer: 'АК АК АК! • ИМПЕРИЯ МАРСА © 2024 • ВСЕ ЛЮДИ ЗАРЕЗЕРВИРОВАНЫ ДЛЯ ЭКСПЕРИМЕНТОВ',
     lang: 'EN'
   }
@@ -118,7 +136,7 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang((l: 'EN' | 'RU') => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>
         </button>
@@ -155,6 +173,8 @@ function App() {
               <button className="btn btn-primary" aria-label="Join the invasion"><span className="btn-icon" role="img" aria-label="join">🚀</span><span>{t.join}</span></button>
               <button className="btn btn-secondary" aria-label="Surrender now"><span className="btn-icon" role="img" aria-label="surrender">🕊️</span><span>{t.surrender}</span></button>
               <button className="hero-cta"><span>Start Your Adventure</span></button>
+              <button className="btn btn-primary" aria-label="Explore galaxy"><span className="btn-icon" role="img" aria-label="explore">🌌</span><span>{t.explore}</span></button>
+              <button className="btn btn-secondary" aria-label="Recruit humans"><span className="btn-icon" role="img" aria-label="recruit">👥</span><span>{t.recruit}</span></button>
             </div>
           </div>
           <div className="mars-bg"></div>
@@ -183,6 +203,19 @@ function App() {
                 <p><span>{t.mindDesc}</span></p>
                 <button className="learn-more" aria-label="Learn more about mind control"><span>Learn More</span></button>
               </div>
+            </div>
+          </div>
+        </section>
+        <div className="section-divider" />
+        {/* Action Buttons Section */}
+        <section id="actions" className="features">
+          <div className="container">
+            <h2 className="section-title"><span>MISSION CONTROL</span></h2>
+            <div className="action-buttons-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
+              <ActionButton icon="⚔️" label={t.launch} description="Begin the final assault on Earth" />
+              <ActionButton icon="🛡️" label={t.defend} description="Protect your home planet" />
+              <ActionButton icon="🤝" label={t.negotiate} description="Seek diplomatic solutions" />
+              <ActionButton icon="🚀" label={t.evacuate} description="Emergency evacuation protocol" />
             </div>
           </div>
         </section>
@@ -284,5 +317,55 @@ function ColorToggleButton({ t }) {
       <span className="btn-icon" role="img" aria-label="color">🎨</span>
       <span>{on ? t.martianGreen : t.martianRed}</span>
     </button>
+  );
+}
+
+// ActionButton: interactive mission control button
+/** @param {{ icon: string, label: string, description: string }} props */
+function ActionButton({ icon, label, description }) {
+  const [activated, setActivated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  
+  const handleClick = () => {
+    if (loading) return;
+    setLoading(true);
+    setTimeout(() => {
+      setActivated(!activated);
+      setLoading(false);
+    }, 1000);
+  };
+  
+  return (
+    <div className="action-button-card" style={{ 
+      background: activated ? 'linear-gradient(135deg, #4a5d23 0%, #2d3d0f 100%)' : 'linear-gradient(135deg, #8B0000 0%, #4B0000 100%)', 
+      border: activated ? '2px solid #9acd32' : '2px solid #ff4444',
+      borderRadius: '10px', 
+      padding: '1.5rem', 
+      textAlign: 'center',
+      transition: 'all 0.3s ease',
+      cursor: loading ? 'wait' : 'pointer'
+    }}>
+      <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{icon}</div>
+      <button 
+        className={activated ? 'btn btn-secondary' : 'btn btn-primary'} 
+        onClick={handleClick}
+        disabled={loading}
+        style={{ 
+          width: '100%', 
+          marginBottom: '1rem',
+          opacity: loading ? 0.7 : 1
+        }}
+      >
+        <span>{loading ? '⏳ Processing...' : (activated ? '✅ ' + label : label)}</span>
+      </button>
+      <p style={{ 
+        color: activated ? '#9acd32' : '#ffff00', 
+        fontSize: '0.9rem', 
+        margin: 0,
+        fontStyle: 'italic'
+      }}>
+        {description}
+      </p>
+    </div>
   );
 }
