@@ -187,7 +187,7 @@ function HomePage({ t, setCurrentPage }) {
           <div className="hero-buttons">
             <button className="btn btn-primary" aria-label="Join the invasion"><span className="btn-icon" role="img" aria-label="join">🚀</span><span>{t.join}</span></button>
             <button className="btn btn-secondary" aria-label="Surrender now"><span className="btn-icon" role="img" aria-label="surrender">🕊️</span><span>{t.surrender}</span></button>
-            <button className="hero-cta"><span>Start Your Adventure</span></button>
+            <button className="hero-cta"><span className="btn-icon" role="img" aria-label="adventure">⚡</span><span>Start Your Adventure</span></button>
           </div>
         </div>
         <div className="mars-bg"></div>
