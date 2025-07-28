@@ -69,8 +69,10 @@ const translations = {
     footer: 'ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION',
     lang: 'RU',
     htmlElements: 'HTML Elements Demo',
+    reactShowcase: 'React Showcase',
     backToHome: 'Back to Home',
-    htmlElementsTitle: 'HTML Elements Showcase'
+    htmlElementsTitle: 'HTML Elements Showcase',
+    reactShowcaseTitle: 'React Elements Showcase'
   },
   RU: {
     heroTitle: 'НАПАДЕНИЕ МАРСА!',
@@ -102,15 +104,17 @@ const translations = {
     footer: 'АК АК АК! • ИМПЕРИЯ МАРСА © 2024 • ВСЕ ЛЮДИ ЗАРЕЗЕРВИРОВАНЫ ДЛЯ ЭКСПЕРИМЕНТОВ',
     lang: 'EN',
     htmlElements: 'HTML Элементы Демо',
+    reactShowcase: 'React Витрина',
     backToHome: 'Назад на Главную',
-    htmlElementsTitle: 'Витрина HTML Элементов'
+    htmlElementsTitle: 'Витрина HTML Элементов',
+    reactShowcaseTitle: 'React Элементы Витрина'
   }
 };
 
 function App() {
   /** @type {['EN' | 'RU', Function]} */
   const [lang, setLang] = useState('EN');
-  /** @type {['home' | 'html-elements', Function]} */
+  /** @type {['home' | 'html-elements' | 'react-showcase', Function]} */
   const [currentPage, setCurrentPage] = useState('home');
   /** @type {Translation} */
   const t = translations[lang];
@@ -128,6 +132,7 @@ function App() {
               <li><a href="#features"><span>Features</span></a></li>
               <li><a href="#test-zone"><span>Test Zone</span></a></li>
               <li><button onClick={() => setCurrentPage('html-elements')} className="nav-btn"><span>{t.htmlElements}</span></button></li>
+              <li><button onClick={() => setCurrentPage('react-showcase')} className="nav-btn"><span>{t.reactShowcase}</span></button></li>
               <li><a href="#footer"><span>Footer</span></a></li>
             </>
           ) : (
@@ -145,8 +150,10 @@ function App() {
       <div className="mars-landing" id="main-content" role="main">
         {currentPage === 'home' ? (
           <HomePage t={t} setCurrentPage={setCurrentPage} />
-        ) : (
+        ) : currentPage === 'html-elements' ? (
           <HTMLElementsPage t={t} />
+        ) : (
+          <ReactShowcasePage t={t} />
         )}
       </div>
     </>
@@ -244,9 +251,18 @@ function HomePage({ t, setCurrentPage }) {
             className="btn btn-primary" 
             onClick={() => setCurrentPage('html-elements')}
             aria-label="Navigate to HTML Elements showcase"
+            style={{ marginRight: '1rem' }}
           >
             <span className="btn-icon" role="img" aria-label="elements">🧱</span>
             <span>{t.htmlElements}</span>
+          </button>
+          <button 
+            className="btn btn-secondary" 
+            onClick={() => setCurrentPage('react-showcase')}
+            aria-label="Navigate to React Showcase"
+          >
+            <span className="btn-icon" role="img" aria-label="react">⚛️</span>
+            <span>{t.reactShowcase}</span>
           </button>
         </div>
       </section>
@@ -595,6 +611,515 @@ function invadeEarth() {
           </div>
         </section>
       </div>
+    </div>
+  );
+}
+
+function ReactShowcasePage({ t }) {
+  // Multiple state variables for demonstration
+  const [counter, setCounter] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [selectedColor, setSelectedColor] = useState('red');
+  const [isVisible, setIsVisible] = useState(true);
+  const [todos, setTodos] = useState(['Learn React', 'Build awesome apps']);
+  const [newTodo, setNewTodo] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [theme, setTheme] = useState('light');
+  const [progress, setProgress] = useState(50);
+  const [rating, setRating] = useState(0);
+
+  // useEffect for real-time clock
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // useEffect for theme persistence
+  React.useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  // Event handlers
+  const handleIncrement = () => setCounter(prev => prev + 1);
+  const handleDecrement = () => setCounter(prev => Math.max(0, prev - 1));
+  const handleReset = () => setCounter(0);
+
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    if (newTodo.trim()) {
+      setTodos(prev => [...prev, newTodo.trim()]);
+      setNewTodo('');
+    }
+  };
+
+  const handleRemoveTodo = (index) => {
+    setTodos(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const simulateLoading = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setUserData({
+        id: Math.floor(Math.random() * 1000),
+        name: 'Martian Commander ' + Math.floor(Math.random() * 100),
+        planet: 'Mars',
+        mission: 'Earth Invasion'
+      });
+      setIsLoading(false);
+    }, 2000);
+  };
+
+  const StarRating = ({ rating, onRatingChange }) => {
+    return (
+      <div className="star-rating">
+        {[1, 2, 3, 4, 5].map(star => (
+          <span
+            key={star}
+            className={`star ${star <= rating ? 'filled' : ''}`}
+            onClick={() => onRatingChange(star)}
+            style={{
+              cursor: 'pointer',
+              fontSize: '2rem',
+              color: star <= rating ? '#FFD700' : '#ccc',
+              userSelect: 'none'
+            }}
+          >
+            ★
+          </span>
+        ))}
+      </div>
+    );
+  };
+
+  const ProgressBar = ({ value, max = 100 }) => (
+    <div style={{
+      width: '100%',
+      height: '20px',
+      backgroundColor: '#ddd',
+      borderRadius: '10px',
+      overflow: 'hidden'
+    }}>
+      <div style={{
+        width: `${(value / max) * 100}%`,
+        height: '100%',
+        backgroundColor: '#4CAF50',
+        transition: 'width 0.3s ease'
+      }} />
+    </div>
+  );
+
+  const Modal = ({ isOpen, onClose, children }) => {
+    if (!isOpen) return null;
+    
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1000
+      }}>
+        <div style={{
+          backgroundColor: 'white',
+          padding: '2rem',
+          borderRadius: '8px',
+          maxWidth: '500px',
+          width: '90%',
+          position: 'relative'
+        }}>
+          <button
+            onClick={onClose}
+            style={{
+              position: 'absolute',
+              top: '10px',
+              right: '15px',
+              background: 'none',
+              border: 'none',
+              fontSize: '1.5rem',
+              cursor: 'pointer'
+            }}
+          >
+            ×
+          </button>
+          {children}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className={`react-showcase-page theme-${theme}`}>
+      <div className="container">
+        <header className="page-header">
+          <h1>{t.reactShowcaseTitle}</h1>
+          <p>A comprehensive demonstration of React components, hooks, and interactive elements</p>
+          <div style={{ marginTop: '1rem' }}>
+            <strong>Current Time: </strong>
+            <span style={{ color: '#e74c3c', fontFamily: 'monospace' }}>
+              {currentTime.toLocaleTimeString()}
+            </span>
+          </div>
+        </header>
+
+        {/* Theme Toggle */}
+        <section className="elements-section">
+          <h2>🎨 Theme Control</h2>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <button
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              className="btn btn-primary"
+              style={{
+                backgroundColor: theme === 'dark' ? '#2c3e50' : '#3498db',
+                color: 'white'
+              }}
+            >
+              Switch to {theme === 'light' ? 'Dark' : 'Light'} Theme
+            </button>
+            <span>Current theme: <strong>{theme}</strong></span>
+          </div>
+        </section>
+
+        {/* Counter Section */}
+        <section className="elements-section">
+          <h2>🔢 Interactive Counter</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <button onClick={handleDecrement} className="btn btn-secondary">-</button>
+            <span style={{
+              fontSize: '2rem',
+              fontWeight: 'bold',
+              color: counter > 10 ? '#27ae60' : '#e74c3c',
+              minWidth: '60px',
+              textAlign: 'center'
+            }}>
+              {counter}
+            </span>
+            <button onClick={handleIncrement} className="btn btn-primary">+</button>
+            <button onClick={handleReset} className="btn btn-secondary">Reset</button>
+            {counter > 0 && (
+              <span style={{ color: '#f39c12' }}>
+                {counter === 1 ? '1 click!' : `${counter} clicks!`}
+              </span>
+            )}
+          </div>
+        </section>
+
+        {/* Form Inputs Section */}
+        <section className="elements-section">
+          <h2>📋 Dynamic Form Controls</h2>
+          <div style={{ display: 'grid', gap: '1rem', maxWidth: '600px' }}>
+            <div>
+              <label>Name: </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+                style={{ marginLeft: '1rem', padding: '0.5rem', borderRadius: '4px' }}
+              />
+              {name && <span style={{ marginLeft: '1rem', color: '#27ae60' }}>Hello, {name}! 👋</span>}
+            </div>
+            
+            <div>
+              <label>Email: </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                style={{ marginLeft: '1rem', padding: '0.5rem', borderRadius: '4px' }}
+              />
+              {email && email.includes('@') && (
+                <span style={{ marginLeft: '1rem', color: '#27ae60' }}>✓ Valid email format</span>
+              )}
+            </div>
+
+            <div>
+              <label>Favorite Color: </label>
+              <select
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e.target.value)}
+                style={{ marginLeft: '1rem', padding: '0.5rem', borderRadius: '4px' }}
+              >
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="purple">Purple</option>
+                <option value="orange">Orange</option>
+              </select>
+              <div
+                style={{
+                  display: 'inline-block',
+                  width: '30px',
+                  height: '30px',
+                  backgroundColor: selectedColor,
+                  marginLeft: '1rem',
+                  borderRadius: '50%',
+                  border: '2px solid #333'
+                }}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Conditional Rendering Section */}
+        <section className="elements-section">
+          <h2>👁️ Conditional Rendering</h2>
+          <div>
+            <button
+              onClick={() => setIsVisible(!isVisible)}
+              className="btn btn-primary"
+            >
+              {isVisible ? 'Hide' : 'Show'} Secret Message
+            </button>
+            {isVisible && (
+              <div style={{
+                marginTop: '1rem',
+                padding: '1rem',
+                backgroundColor: '#f8f9fa',
+                border: '2px dashed #6c757d',
+                borderRadius: '8px'
+              }}>
+                <p>🛸 <strong>Top Secret Martian Intel:</strong> The invasion will begin at midnight! 
+                   Prepare your ray guns and polish your flying saucers! 👽</p>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Todo List Section */}
+        <section className="elements-section">
+          <h2>📝 Dynamic Todo List</h2>
+          <form onSubmit={handleAddTodo} style={{ marginBottom: '1rem' }}>
+            <input
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+              placeholder="Add a new task..."
+              style={{ padding: '0.5rem', marginRight: '1rem', borderRadius: '4px', minWidth: '200px' }}
+            />
+            <button type="submit" className="btn btn-primary">Add Task</button>
+          </form>
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {todos.map((todo, index) => (
+              <li key={index} style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '0.5rem',
+                margin: '0.5rem 0',
+                backgroundColor: '#f8f9fa',
+                borderRadius: '4px',
+                border: '1px solid #dee2e6'
+              }}>
+                <span>📌 {todo}</span>
+                <button
+                  onClick={() => handleRemoveTodo(index)}
+                  className="btn btn-secondary"
+                  style={{ fontSize: '0.8rem', padding: '0.25rem 0.5rem' }}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p><strong>Total tasks:</strong> {todos.length}</p>
+        </section>
+
+        {/* Progress Bar Section */}
+        <section className="elements-section">
+          <h2>📊 Progress Control</h2>
+          <div>
+            <div style={{ marginBottom: '1rem' }}>
+              <label>Progress: {progress}%</label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={(e) => setProgress(Number(e.target.value))}
+                style={{ width: '100%', margin: '0.5rem 0' }}
+              />
+            </div>
+            <ProgressBar value={progress} />
+            <div style={{ marginTop: '0.5rem', display: 'flex', gap: '1rem' }}>
+              <button onClick={() => setProgress(0)} className="btn btn-secondary">0%</button>
+              <button onClick={() => setProgress(25)} className="btn btn-secondary">25%</button>
+              <button onClick={() => setProgress(50)} className="btn btn-secondary">50%</button>
+              <button onClick={() => setProgress(75)} className="btn btn-secondary">75%</button>
+              <button onClick={() => setProgress(100)} className="btn btn-secondary">100%</button>
+            </div>
+          </div>
+        </section>
+
+        {/* Star Rating Section */}
+        <section className="elements-section">
+          <h2>⭐ Interactive Rating</h2>
+          <div>
+            <p>Rate your Mars invasion experience:</p>
+            <StarRating rating={rating} onRatingChange={setRating} />
+            <p style={{ marginTop: '1rem' }}>
+              {rating === 0 && "Click stars to rate!"}
+              {rating === 1 && "😞 Terrible invasion!"}
+              {rating === 2 && "😐 Could use more death rays"}
+              {rating === 3 && "🙂 Decent alien technology"}
+              {rating === 4 && "😊 Great Martian experience!"}
+              {rating === 5 && "🤩 Best invasion ever!"}
+            </p>
+          </div>
+        </section>
+
+        {/* Modal Section */}
+        <section className="elements-section">
+          <h2>🔲 Modal Dialog</h2>
+          <button
+            onClick={() => setShowModal(true)}
+            className="btn btn-primary"
+          >
+            Open Martian Communication Portal
+          </button>
+          <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+            <h3>🛸 Martian Command Center</h3>
+            <p>Greetings, Earthling! You have successfully opened communication with Mars.</p>
+            <p><strong>Status:</strong> Ready to receive your surrender</p>
+            <p><strong>Next Steps:</strong> Prepare for peaceful assimilation</p>
+            <button
+              onClick={() => setShowModal(false)}
+              className="btn btn-primary"
+              style={{ marginTop: '1rem' }}
+            >
+              End Transmission
+            </button>
+          </Modal>
+        </section>
+
+        {/* Loading State Section */}
+        <section className="elements-section">
+          <h2>⏳ Loading States & Data Fetching</h2>
+          <button
+            onClick={simulateLoading}
+            disabled={isLoading}
+            className="btn btn-primary"
+            style={{ opacity: isLoading ? 0.6 : 1 }}
+          >
+            {isLoading ? 'Loading Martian Data...' : 'Fetch Alien Intelligence'}
+          </button>
+          
+          {isLoading && (
+            <div style={{ marginTop: '1rem' }}>
+              <div style={{
+                width: '100%',
+                height: '4px',
+                backgroundColor: '#f0f0f0',
+                borderRadius: '2px',
+                overflow: 'hidden'
+              }}>
+                <div style={{
+                  width: '30%',
+                  height: '100%',
+                  backgroundColor: '#e74c3c',
+                  animation: 'slide 1.5s infinite'
+                }} />
+              </div>
+              <p style={{ marginTop: '0.5rem', fontStyle: 'italic' }}>
+                🛸 Connecting to Mars satellites...
+              </p>
+            </div>
+          )}
+          
+          {userData && !isLoading && (
+            <div style={{
+              marginTop: '1rem',
+              padding: '1rem',
+              backgroundColor: '#d4edda',
+              border: '1px solid #c3e6cb',
+              borderRadius: '8px'
+            }}>
+              <h4>👽 Alien Profile Retrieved:</h4>
+              <p><strong>ID:</strong> {userData.id}</p>
+              <p><strong>Name:</strong> {userData.name}</p>
+              <p><strong>Home Planet:</strong> {userData.planet}</p>
+              <p><strong>Mission:</strong> {userData.mission}</p>
+            </div>
+          )}
+        </section>
+
+        {/* Component Composition Example */}
+        <section className="elements-section">
+          <h2>🧩 Component Composition</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
+            {['Scout Ship', 'Battle Cruiser', 'Mothership'].map((shipType, index) => (
+              <div key={shipType} style={{
+                padding: '1rem',
+                border: '2px solid #6c757d',
+                borderRadius: '8px',
+                backgroundColor: index % 2 === 0 ? '#f8f9fa' : '#e9ecef'
+              }}>
+                <h4>🛸 {shipType}</h4>
+                <p><strong>Status:</strong> {['Active', 'Maintenance', 'Deployed'][index]}</p>
+                <p><strong>Crew:</strong> {[5, 25, 150][index]} aliens</p>
+                <button className="btn btn-secondary" style={{ fontSize: '0.8rem' }}>
+                  Launch Mission
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Real-time Updates Section */}
+        <section className="elements-section">
+          <h2>⚡ Real-time Updates</h2>
+          <div style={{
+            padding: '1rem',
+            backgroundColor: '#fff3cd',
+            border: '1px solid #ffeaa7',
+            borderRadius: '8px'
+          }}>
+            <p><strong>🕐 Mars Standard Time:</strong> {currentTime.toLocaleString()}</p>
+            <p><strong>🌍 Earth Coordinates:</strong> {Math.sin(Date.now() / 10000).toFixed(6)}, {Math.cos(Date.now() / 10000).toFixed(6)}</p>
+            <p><strong>🛰️ Active UFOs:</strong> {Math.floor(Math.sin(Date.now() / 5000) * 10) + 15}</p>
+            <p><strong>⚡ Energy Level:</strong> {Math.floor(Math.abs(Math.sin(Date.now() / 3000)) * 100)}%</p>
+          </div>
+        </section>
+
+        <div style={{ marginTop: '3rem', textAlign: 'center' }}>
+          <p style={{ fontSize: '1.2rem', color: '#6c757d' }}>
+            🎉 You've experienced {Object.values({counter, todos: todos.length, rating, progress}).reduce((a, b) => a + b, 0)} interactions!
+          </p>
+        </div>
+      </div>
+      
+      <style jsx>{`
+        @keyframes slide {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(300%); }
+        }
+        .theme-dark {
+          background-color: #2c3e50;
+          color: #ecf0f1;
+        }
+        .theme-dark .elements-section {
+          background-color: #34495e;
+          border-color: #7f8c8d;
+        }
+      `}</style>
     </div>
   );
 }
