@@ -70,7 +70,38 @@ const translations = {
     lang: 'RU',
     htmlElements: 'HTML Elements Demo',
     backToHome: 'Back to Home',
-    htmlElementsTitle: 'HTML Elements Showcase'
+    htmlElementsTitle: 'HTML Elements Showcase',
+    interactiveComponents: 'Interactive Components',
+    interactiveComponentsTitle: 'Interactive React Components Showcase',
+    timer: 'Timer',
+    startTimer: 'Start Timer',
+    stopTimer: 'Stop Timer',
+    resetTimer: 'Reset Timer',
+    progressDemo: 'Progress Demo',
+    increaseProgress: 'Increase Progress',
+    decreaseProgress: 'Decrease Progress',
+    modalDemo: 'Modal Demo',
+    openModal: 'Open Modal',
+    closeModal: 'Close Modal',
+    modalTitle: 'Martian Alert!',
+    modalContent: 'This is a modal dialog with important alien information.',
+    tabsDemo: 'Tabs Demo',
+    tab1: 'Invasion Plans',
+    tab2: 'Alien Tech',
+    tab3: 'Earth Status',
+    accordionDemo: 'Accordion Demo',
+    toastDemo: 'Toast Notifications',
+    showToast: 'Show Toast',
+    imageGallery: 'Image Gallery',
+    colorPicker: 'Color Picker',
+    formValidation: 'Form Validation',
+    submit: 'Submit',
+    loading: 'Loading...',
+    searchFilter: 'Search & Filter',
+    searchPlaceholder: 'Search items...',
+    all: 'All',
+    active: 'Active',
+    inactive: 'Inactive'
   },
   RU: {
     heroTitle: 'НАПАДЕНИЕ МАРСА!',
@@ -103,14 +134,45 @@ const translations = {
     lang: 'EN',
     htmlElements: 'HTML Элементы Демо',
     backToHome: 'Назад на Главную',
-    htmlElementsTitle: 'Витрина HTML Элементов'
+    htmlElementsTitle: 'Витрина HTML Элементов',
+    interactiveComponents: 'Интерактивные Компоненты',
+    interactiveComponentsTitle: 'Витрина Интерактивных React Компонентов',
+    timer: 'Таймер',
+    startTimer: 'Запустить Таймер',
+    stopTimer: 'Остановить Таймер',
+    resetTimer: 'Сбросить Таймер',
+    progressDemo: 'Демо Прогресса',
+    increaseProgress: 'Увеличить Прогресс',
+    decreaseProgress: 'Уменьшить Прогресс',
+    modalDemo: 'Демо Модального Окна',
+    openModal: 'Открыть Модальное Окно',
+    closeModal: 'Закрыть',
+    modalTitle: 'Марсианское Предупреждение!',
+    modalContent: 'Это модальное диалоговое окно с важной инопланетной информацией.',
+    tabsDemo: 'Демо Вкладок',
+    tab1: 'Планы Вторжения',
+    tab2: 'Инопланетные Технологии',
+    tab3: 'Статус Земли',
+    accordionDemo: 'Демо Аккордеона',
+    toastDemo: 'Уведомления Toast',
+    showToast: 'Показать Уведомление',
+    imageGallery: 'Галерея Изображений',
+    colorPicker: 'Выбор Цвета',
+    formValidation: 'Валидация Формы',
+    submit: 'Отправить',
+    loading: 'Загрузка...',
+    searchFilter: 'Поиск и Фильтр',
+    searchPlaceholder: 'Поиск элементов...',
+    all: 'Все',
+    active: 'Активные',
+    inactive: 'Неактивные'
   }
 };
 
 function App() {
   /** @type {['EN' | 'RU', Function]} */
   const [lang, setLang] = useState('EN');
-  /** @type {['home' | 'html-elements', Function]} */
+  /** @type {['home' | 'html-elements' | 'interactive-components', Function]} */
   const [currentPage, setCurrentPage] = useState('home');
   /** @type {Translation} */
   const t = translations[lang];
@@ -128,6 +190,7 @@ function App() {
               <li><a href="#features"><span>Features</span></a></li>
               <li><a href="#test-zone"><span>Test Zone</span></a></li>
               <li><button onClick={() => setCurrentPage('html-elements')} className="nav-btn"><span>{t.htmlElements}</span></button></li>
+              <li><button onClick={() => setCurrentPage('interactive-components')} className="nav-btn"><span>{t.interactiveComponents}</span></button></li>
               <li><a href="#footer"><span>Footer</span></a></li>
             </>
           ) : (
@@ -145,8 +208,10 @@ function App() {
       <div className="mars-landing" id="main-content" role="main">
         {currentPage === 'home' ? (
           <HomePage t={t} setCurrentPage={setCurrentPage} />
-        ) : (
+        ) : currentPage === 'html-elements' ? (
           <HTMLElementsPage t={t} />
+        ) : (
+          <InteractiveComponentsPage t={t} />
         )}
       </div>
     </>
@@ -240,14 +305,24 @@ function HomePage({ t, setCurrentPage }) {
       {/* Navigation to HTML Elements Page */}
       <section className="html-elements-nav">
         <div className="container">
-          <button 
-            className="btn btn-primary" 
-            onClick={() => setCurrentPage('html-elements')}
-            aria-label="Navigate to HTML Elements showcase"
-          >
-            <span className="btn-icon" role="img" aria-label="elements">🧱</span>
-            <span>{t.htmlElements}</span>
-          </button>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+            <button 
+              className="btn btn-primary" 
+              onClick={() => setCurrentPage('html-elements')}
+              aria-label="Navigate to HTML Elements showcase"
+            >
+              <span className="btn-icon" role="img" aria-label="elements">🧱</span>
+              <span>{t.htmlElements}</span>
+            </button>
+            <button 
+              className="btn btn-secondary" 
+              onClick={() => setCurrentPage('interactive-components')}
+              aria-label="Navigate to Interactive Components showcase"
+            >
+              <span className="btn-icon" role="img" aria-label="components">⚡</span>
+              <span>{t.interactiveComponents}</span>
+            </button>
+          </div>
         </div>
       </section>
       <div className="section-divider" />
@@ -591,6 +666,558 @@ function invadeEarth() {
               <a href="https://example.com" target="_blank" rel="noopener noreferrer">External Link</a>
               <a href="mailto:aliens@mars.galaxy">Email Link</a>
               <a href="tel:+1-800-MARTIAN">Phone Link</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+function InteractiveComponentsPage({ t }) {
+  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [progress, setProgress] = useState(50);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
+  const [accordionOpen, setAccordionOpen] = useState({});
+  const [toasts, setToasts] = useState([]);
+  const [selectedColor, setSelectedColor] = useState('#ff0000');
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filter, setFilter] = useState('all');
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Timer effect
+  React.useEffect(() => {
+    let interval = null;
+    if (timerRunning) {
+      interval = setInterval(() => {
+        setTimerSeconds(seconds => seconds + 1);
+      }, 1000);
+    } else if (!timerRunning && timerSeconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [timerRunning, timerSeconds]);
+
+  // Sample data for filtering
+  const items = [
+    { id: 1, name: 'Martian Ray Gun', status: 'active' },
+    { id: 2, name: 'UFO Engine', status: 'inactive' },
+    { id: 3, name: 'Brain Scanner', status: 'active' },
+    { id: 4, name: 'Teleporter', status: 'inactive' },
+    { id: 5, name: 'Force Field Generator', status: 'active' },
+  ];
+
+  // Sample images for gallery
+  const galleryImages = [
+    'https://via.placeholder.com/300x200/ff0000/ffffff?text=Mars+Image+1',
+    'https://via.placeholder.com/300x200/00ff00/ffffff?text=Mars+Image+2',
+    'https://via.placeholder.com/300x200/0000ff/ffffff?text=Mars+Image+3',
+    'https://via.placeholder.com/300x200/ffff00/000000?text=Mars+Image+4',
+  ];
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const toggleAccordion = (index) => {
+    setAccordionOpen(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
+  const showToast = (message) => {
+    const id = Date.now();
+    const toast = { id, message };
+    setToasts(prev => [...prev, toast]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 3000);
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.name.trim()) errors.name = 'Name is required';
+    if (!formData.email.trim()) errors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = 'Email is invalid';
+    return errors;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const errors = validateForm();
+    setFormErrors(errors);
+    
+    if (Object.keys(errors).length === 0) {
+      setLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
+      setLoading(false);
+      showToast('Form submitted successfully!');
+      setFormData({ name: '', email: '' });
+    }
+  };
+
+  const filteredItems = items.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filter === 'all' || item.status === filter;
+    return matchesSearch && matchesFilter;
+  });
+
+  const tabs = [
+    { title: t.tab1, content: 'Phase 1: Reconnaissance complete. Earth defenses are minimal.' },
+    { title: t.tab2, content: 'Our quantum disintegrators are 99.7% effective against human technology.' },
+    { title: t.tab3, content: 'Population: 8 billion humans. Estimated harvest time: 72 Earth hours.' }
+  ];
+
+  return (
+    <div className="interactive-components-page">
+      <div className="container">
+        <header className="page-header">
+          <h1>{t.interactiveComponentsTitle}</h1>
+          <p>A comprehensive showcase of interactive React components with Martian styling</p>
+        </header>
+
+        {/* Toast Container */}
+        <div className="toast-container" style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 1000 }}>
+          {toasts.map(toast => (
+            <div key={toast.id} className="toast" style={{ 
+              background: '#ff0000', 
+              color: 'white', 
+              padding: '1rem', 
+              marginBottom: '0.5rem', 
+              borderRadius: '4px',
+              animation: 'slideIn 0.3s ease-out'
+            }}>
+              {toast.message}
+            </div>
+          ))}
+        </div>
+
+        {/* Timer Section */}
+        <section className="elements-section">
+          <h2>{t.timer}</h2>
+          <div className="timer-demo" style={{ textAlign: 'center', padding: '2rem' }}>
+            <div className="timer-display" style={{ fontSize: '3rem', color: '#ff0000', marginBottom: '1rem' }}>
+              {formatTime(timerSeconds)}
+            </div>
+            <div className="timer-controls" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <button 
+                className="btn btn-primary" 
+                onClick={() => setTimerRunning(!timerRunning)}
+              >
+                {timerRunning ? t.stopTimer : t.startTimer}
+              </button>
+              <button 
+                className="btn btn-secondary" 
+                onClick={() => { setTimerSeconds(0); setTimerRunning(false); }}
+              >
+                {t.resetTimer}
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Progress Bar Section */}
+        <section className="elements-section">
+          <h2>{t.progressDemo}</h2>
+          <div className="progress-demo" style={{ padding: '2rem' }}>
+            <div className="progress-bar" style={{ 
+              width: '100%', 
+              height: '30px', 
+              backgroundColor: '#333', 
+              borderRadius: '15px', 
+              overflow: 'hidden',
+              marginBottom: '1rem'
+            }}>
+              <div 
+                className="progress-fill" 
+                style={{ 
+                  height: '100%', 
+                  width: `${progress}%`, 
+                  backgroundColor: '#ff0000', 
+                  transition: 'width 0.3s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: 'bold'
+                }}
+              >
+                {progress}%
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <button 
+                className="btn btn-primary" 
+                onClick={() => setProgress(Math.min(100, progress + 10))}
+                disabled={progress >= 100}
+              >
+                {t.increaseProgress}
+              </button>
+              <button 
+                className="btn btn-secondary" 
+                onClick={() => setProgress(Math.max(0, progress - 10))}
+                disabled={progress <= 0}
+              >
+                {t.decreaseProgress}
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Modal Section */}
+        <section className="elements-section">
+          <h2>{t.modalDemo}</h2>
+          <div className="modal-demo" style={{ padding: '2rem', textAlign: 'center' }}>
+            <button className="btn btn-primary" onClick={() => setModalOpen(true)}>
+              {t.openModal}
+            </button>
+            
+            {modalOpen && (
+              <div className="modal-overlay" style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1000
+              }}>
+                <div className="modal-content" style={{
+                  backgroundColor: '#1a1a1a',
+                  padding: '2rem',
+                  borderRadius: '8px',
+                  border: '2px solid #ff0000',
+                  maxWidth: '500px',
+                  width: '90%'
+                }}>
+                  <h3 style={{ color: '#ff0000', marginBottom: '1rem' }}>{t.modalTitle}</h3>
+                  <p style={{ color: 'white', marginBottom: '2rem' }}>{t.modalContent}</p>
+                  <button className="btn btn-secondary" onClick={() => setModalOpen(false)}>
+                    {t.closeModal}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Tabs Section */}
+        <section className="elements-section">
+          <h2>{t.tabsDemo}</h2>
+          <div className="tabs-demo">
+            <div className="tab-headers" style={{ display: 'flex', borderBottom: '2px solid #333' }}>
+              {tabs.map((tab, index) => (
+                <button
+                  key={index}
+                  className={`tab-header ${activeTab === index ? 'active' : ''}`}
+                  style={{
+                    padding: '1rem 2rem',
+                    border: 'none',
+                    backgroundColor: activeTab === index ? '#ff0000' : '#333',
+                    color: 'white',
+                    cursor: 'pointer',
+                    borderRadius: '8px 8px 0 0'
+                  }}
+                  onClick={() => setActiveTab(index)}
+                >
+                  {tab.title}
+                </button>
+              ))}
+            </div>
+            <div className="tab-content" style={{ 
+              padding: '2rem', 
+              backgroundColor: '#1a1a1a', 
+              border: '2px solid #333',
+              borderTop: 'none'
+            }}>
+              <p style={{ color: 'white' }}>{tabs[activeTab].content}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Accordion Section */}
+        <section className="elements-section">
+          <h2>{t.accordionDemo}</h2>
+          <div className="accordion-demo">
+            {['Invasion Strategy', 'Alien Technology', 'Earth Defenses'].map((title, index) => (
+              <div key={index} className="accordion-item" style={{ 
+                border: '1px solid #333', 
+                marginBottom: '0.5rem' 
+              }}>
+                <button
+                  className="accordion-header"
+                  style={{
+                    width: '100%',
+                    padding: '1rem',
+                    backgroundColor: '#333',
+                    color: 'white',
+                    border: 'none',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                  onClick={() => toggleAccordion(index)}
+                >
+                  {title}
+                  <span>{accordionOpen[index] ? '−' : '+'}</span>
+                </button>
+                {accordionOpen[index] && (
+                  <div className="accordion-content" style={{ 
+                    padding: '1rem', 
+                    backgroundColor: '#1a1a1a', 
+                    color: 'white' 
+                  }}>
+                    <p>Detailed information about {title.toLowerCase()} will be displayed here.</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Image Gallery Section */}
+        <section className="elements-section">
+          <h2>{t.imageGallery}</h2>
+          <div className="gallery-demo" style={{ textAlign: 'center' }}>
+            <div className="main-image" style={{ marginBottom: '1rem' }}>
+              <img 
+                src={galleryImages[currentImageIndex]} 
+                alt={`Gallery image ${currentImageIndex + 1}`}
+                style={{ maxWidth: '100%', height: '300px', objectFit: 'cover', borderRadius: '8px' }}
+              />
+            </div>
+            <div className="thumbnail-nav" style={{ 
+              display: 'flex', 
+              gap: '0.5rem', 
+              justifyContent: 'center',
+              marginBottom: '1rem'
+            }}>
+              {galleryImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`Thumbnail ${index + 1}`}
+                  style={{ 
+                    width: '60px', 
+                    height: '40px', 
+                    objectFit: 'cover', 
+                    cursor: 'pointer',
+                    border: currentImageIndex === index ? '2px solid #ff0000' : '2px solid transparent',
+                    borderRadius: '4px'
+                  }}
+                  onClick={() => setCurrentImageIndex(index)}
+                />
+              ))}
+            </div>
+            <div className="gallery-controls" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <button 
+                className="btn btn-secondary" 
+                onClick={() => setCurrentImageIndex(Math.max(0, currentImageIndex - 1))}
+                disabled={currentImageIndex === 0}
+              >
+                ← Previous
+              </button>
+              <button 
+                className="btn btn-secondary" 
+                onClick={() => setCurrentImageIndex(Math.min(galleryImages.length - 1, currentImageIndex + 1))}
+                disabled={currentImageIndex === galleryImages.length - 1}
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Color Picker Section */}
+        <section className="elements-section">
+          <h2>{t.colorPicker}</h2>
+          <div className="color-picker-demo" style={{ padding: '2rem', textAlign: 'center' }}>
+            <input
+              type="color"
+              value={selectedColor}
+              onChange={(e) => setSelectedColor(e.target.value)}
+              style={{ width: '100px', height: '50px', border: 'none', cursor: 'pointer' }}
+            />
+            <div style={{ 
+              marginTop: '1rem', 
+              padding: '2rem', 
+              backgroundColor: selectedColor, 
+              borderRadius: '8px',
+              color: 'white',
+              textShadow: '1px 1px 2px rgba(0,0,0,0.8)'
+            }}>
+              Selected Color: {selectedColor}
+            </div>
+          </div>
+        </section>
+
+        {/* Form Validation Section */}
+        <section className="elements-section">
+          <h2>{t.formValidation}</h2>
+          <form onSubmit={handleSubmit} className="validation-form" style={{ maxWidth: '400px', margin: '0 auto' }}>
+            <div className="form-group" style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: 'white' }}>Name:</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  border: formErrors.name ? '2px solid #ff0000' : '2px solid #333',
+                  borderRadius: '4px',
+                  backgroundColor: '#1a1a1a',
+                  color: 'white'
+                }}
+              />
+              {formErrors.name && <span style={{ color: '#ff0000', fontSize: '0.8rem' }}>{formErrors.name}</span>}
+            </div>
+            
+            <div className="form-group" style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: 'white' }}>Email:</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  border: formErrors.email ? '2px solid #ff0000' : '2px solid #333',
+                  borderRadius: '4px',
+                  backgroundColor: '#1a1a1a',
+                  color: 'white'
+                }}
+              />
+              {formErrors.email && <span style={{ color: '#ff0000', fontSize: '0.8rem' }}>{formErrors.email}</span>}
+            </div>
+            
+            <button 
+              type="submit" 
+              className="btn btn-primary" 
+              disabled={loading}
+              style={{ width: '100%' }}
+            >
+              {loading ? t.loading : t.submit}
+            </button>
+          </form>
+        </section>
+
+        {/* Search and Filter Section */}
+        <section className="elements-section">
+          <h2>{t.searchFilter}</h2>
+          <div className="search-filter-demo" style={{ padding: '2rem' }}>
+            <div className="controls" style={{ 
+              display: 'flex', 
+              gap: '1rem', 
+              marginBottom: '2rem', 
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}>
+              <input
+                type="text"
+                placeholder={t.searchPlaceholder}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{
+                  padding: '0.5rem',
+                  borderRadius: '4px',
+                  border: '2px solid #333',
+                  backgroundColor: '#1a1a1a',
+                  color: 'white',
+                  minWidth: '200px'
+                }}
+              />
+              <select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+                style={{
+                  padding: '0.5rem',
+                  borderRadius: '4px',
+                  border: '2px solid #333',
+                  backgroundColor: '#1a1a1a',
+                  color: 'white'
+                }}
+              >
+                <option value="all">{t.all}</option>
+                <option value="active">{t.active}</option>
+                <option value="inactive">{t.inactive}</option>
+              </select>
+            </div>
+            
+            <div className="items-list">
+              {filteredItems.map(item => (
+                <div
+                  key={item.id}
+                  className="item"
+                  style={{
+                    padding: '1rem',
+                    marginBottom: '0.5rem',
+                    backgroundColor: '#1a1a1a',
+                    border: '1px solid #333',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}
+                >
+                  <span style={{ color: 'white' }}>{item.name}</span>
+                  <span style={{ 
+                    padding: '0.25rem 0.5rem', 
+                    borderRadius: '4px',
+                    backgroundColor: item.status === 'active' ? '#00ff00' : '#ff6600',
+                    color: 'black',
+                    fontSize: '0.8rem'
+                  }}>
+                    {item.status}
+                  </span>
+                </div>
+              ))}
+              {filteredItems.length === 0 && (
+                <p style={{ textAlign: 'center', color: '#666', fontStyle: 'italic' }}>
+                  No items found matching your criteria
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Toast Demo Section */}
+        <section className="elements-section">
+          <h2>{t.toastDemo}</h2>
+          <div className="toast-demo" style={{ padding: '2rem', textAlign: 'center' }}>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button 
+                className="btn btn-primary" 
+                onClick={() => showToast('Success! Mission accomplished!')}
+              >
+                Success Toast
+              </button>
+              <button 
+                className="btn btn-secondary" 
+                onClick={() => showToast('Warning! Earthlings detected!')}
+              >
+                Warning Toast
+              </button>
+              <button 
+                className="btn" 
+                style={{ backgroundColor: '#ff6600', color: 'white' }}
+                onClick={() => showToast('Error! Death ray malfunction!')}
+              >
+                Error Toast
+              </button>
             </div>
           </div>
         </section>
