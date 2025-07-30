@@ -373,7 +373,7 @@ function HTMLElementsPage({ t }) {
             <h5>Heading 5 - Mind Control Section</h5>
             <h6>Heading 6 - UFO Maintenance Crew</h6>
             
-            <p>This is a <strong>paragraph</strong> with <em>emphasized text</em>, <mark>highlighted content</mark>, and <small>small text</small>.</p>
+            <p>This is a <strong>paragraph</strong> with <em className="">emphasized text</em>, <mark>highlighted content</mark>, and <small>small text</small>.</p>
             <p>Here's some <code>inline code</code> and a <kbd>keyboard shortcut</kbd>.</p>
             
             <blockquote>
