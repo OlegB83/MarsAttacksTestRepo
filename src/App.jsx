@@ -186,16 +186,16 @@ function App() {
         <ul className="nav-links">
           {currentPage === 'home' ? (
             <>
-              <li><a href="#hero"><span>Hero</span></a></li>
-              <li><a href="#features"><span>Features</span></a></li>
-              <li><a href="#test-zone"><span>Test Zone</span></a></li>
-              <li><button onClick={() => setCurrentPage('html-elements')} className="nav-btn"><span>{t.htmlElements}</span></button></li>
-              <li><button onClick={() => setCurrentPage('interactive-components')} className="nav-btn"><span>{t.interactiveComponents}</span></button></li>
-              <li><a href="#footer"><span>Footer</span></a></li>
+              <li><a href="#hero">Hero</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#test-zone">Test Zone</a></li>
+              <li><button onClick={() => setCurrentPage('html-elements')} className="nav-btn">{t.htmlElements}</button></li>
+              <li><button onClick={() => setCurrentPage('interactive-components')} className="nav-btn">{t.interactiveComponents}</button></li>
+              <li><a href="#footer">Footer</a></li>
             </>
           ) : (
             <>
-              <li><button onClick={() => setCurrentPage('home')} className="nav-btn"><span>{t.backToHome}</span></button></li>
+              <li><button onClick={() => setCurrentPage('home')} className="nav-btn">{t.backToHome}</button></li>
             </>
           )}
         </ul>
@@ -203,7 +203,7 @@ function App() {
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
-          <span>{t.lang}</span>
+          {t.lang}
         </button>
       <div className="mars-landing" id="main-content" role="main">
         {currentPage === 'home' ? (
@@ -244,15 +244,15 @@ function HomePage({ t, setCurrentPage }) {
         <div className="alien-overlay"></div>
         <div className="hero-content">
           <div className="ufo">🛸</div>
-          <h1 className="hero-title"><span>{t.heroTitle}</span></h1>
-          <div className="hero-tagline"><span>Defend Earth or Join the Martian Empire. The choice is yours!</span></div>
+          <h1 className="hero-title">{t.heroTitle}</h1>
+          <div className="hero-tagline">Defend Earth or Join the Martian Empire. The choice is yours!</div>
           <p className="hero-subtitle">
-            <span>{t.heroSubtitle}</span>
+            {t.heroSubtitle}
           </p>
           <div className="hero-buttons">
-            <button className="btn btn-primary" aria-label="Join the invasion"><span className="btn-icon" role="img" aria-label="join">🚀</span><span>{t.join}</span></button>
-            <button className="btn btn-secondary" aria-label="Surrender now"><span className="btn-icon" role="img" aria-label="surrender">🕊️</span><span>{t.surrender}</span></button>
-            <button className="hero-cta"><span className="btn-icon" role="img" aria-label="adventure">⚡</span><span>Start Your Adventure</span></button>
+            <button className="btn btn-primary" aria-label="Join the invasion"><span className="btn-icon" role="img" aria-label="join">🚀</span>{t.join}</button>
+            <button className="btn btn-secondary" aria-label="Surrender now"><span className="btn-icon" role="img" aria-label="surrender">🕊️</span>{t.surrender}</button>
+            <button className="hero-cta"><span className="btn-icon" role="img" aria-label="adventure">⚡</span>Start Your Adventure</button>
           </div>
         </div>
         <div className="mars-bg"></div>
@@ -261,25 +261,25 @@ function HomePage({ t, setCurrentPage }) {
       {/* Features Section */}
       <section id="features" className="features">
         <div className="container">
-          <h2 className="section-title"><span>{t.featuresTitle}</span></h2>
+          <h2 className="section-title">{t.featuresTitle}</h2>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">👽</div>
-              <h3><span>{t.brain}</span></h3>
-              <p><span>{t.brainDesc}</span></p>
-              <button className="learn-more" aria-label="Learn more about brain extraction"><span>Learn More</span></button>
+              <h3>{t.brain}</h3>
+              <p>{t.brainDesc}</p>
+              <button className="learn-more" aria-label="Learn more about brain extraction">Learn More</button>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🛸</div>
-              <h3><span>{t.rays}</span></h3>
-              <p><span>{t.raysDesc}</span></p>
-              <button className="learn-more" aria-label="Learn more about death rays"><span>Learn More</span></button>
+              <h3>{t.rays}</h3>
+              <p>{t.raysDesc}</p>
+              <button className="learn-more" aria-label="Learn more about death rays">Learn More</button>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🔴</div>
-              <h3><span>{t.mind}</span></h3>
-              <p><span>{t.mindDesc}</span></p>
-              <button className="learn-more" aria-label="Learn more about mind control"><span>Learn More</span></button>
+              <h3>{t.mind}</h3>
+              <p>{t.mindDesc}</p>
+              <button className="learn-more" aria-label="Learn more about mind control">Learn More</button>
             </div>
           </div>
         </div>
@@ -288,7 +288,7 @@ function HomePage({ t, setCurrentPage }) {
       {/* Interactive Test Section */}
       <section id="test-zone" className="features">
         <div className="container">
-          <h2 className="section-title"><span>{t.testZone}</span></h2>
+          <h2 className="section-title">{t.testZone}</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', marginTop: '2rem' }}>
             {/* Dropdown simulation */}
             <DropdownSimulator t={t} />
@@ -312,7 +312,7 @@ function HomePage({ t, setCurrentPage }) {
               aria-label="Navigate to HTML Elements showcase"
             >
               <span className="btn-icon" role="img" aria-label="elements">🧱</span>
-              <span>{t.htmlElements}</span>
+              {t.htmlElements}
             </button>
             <button 
               className="btn btn-secondary" 
@@ -320,7 +320,7 @@ function HomePage({ t, setCurrentPage }) {
               aria-label="Navigate to Interactive Components showcase"
             >
               <span className="btn-icon" role="img" aria-label="components">⚡</span>
-              <span>{t.interactiveComponents}</span>
+              {t.interactiveComponents}
             </button>
           </div>
         </div>
@@ -329,7 +329,7 @@ function HomePage({ t, setCurrentPage }) {
       {/* Footer */}
       <footer id="footer" className="footer">
         <div className="container">
-          <p><span>{t.footer}</span></p>
+          <p>{t.footer}</p>
         </div>
       </footer>
     </>
@@ -1236,13 +1236,13 @@ function DropdownSimulator({ t }) {
     <div>
       <button className="btn btn-primary" aria-label={show ? t.dropdownHide : t.dropdownShow} onClick={() => setShow(s => !s)}>
         <span className="btn-icon" role="img" aria-label="dropdown">{show ? '▲' : '▼'}</span>
-        <span>{show ? t.dropdownHide : t.dropdownShow}</span>
+        {show ? t.dropdownHide : t.dropdownShow}
       </button>
       {show && (
         <select style={{ marginLeft: '1rem', padding: '0.5rem', fontSize: '1rem' }}>
-          <option><span>{t.martian}</span></option>
-          <option><span>{t.venusian}</span></option>
-          <option><span>{t.earthling}</span></option>
+          <option>{t.martian}</option>
+          <option>{t.venusian}</option>
+          <option>{t.earthling}</option>
         </select>
       )}
     </div>
@@ -1257,13 +1257,13 @@ function TextLinesToggle({ t }) {
     <div>
       <button className="btn btn-secondary" aria-label={show ? t.textHide : t.textShow} onClick={() => setShow(s => !s)}>
         <span className="btn-icon" role="img" aria-label="toggle-text">{show ? '🙈' : '📝'}</span>
-        <span>{show ? t.textHide : t.textShow}</span>
+        {show ? t.textHide : t.textShow}
       </button>
       {show && (
         <div style={{ marginTop: '0.5rem', color: '#ffff00', textAlign: 'left' }}>
-          <div><span>{t.line1}</span></div>
-          <div><span>{t.line2}</span></div>
-          <div><span>{t.line3}</span></div>
+          <div>{t.line1}</div>
+          <div>{t.line2}</div>
+          <div>{t.line3}</div>
         </div>
       )}
     </div>
@@ -1277,7 +1277,7 @@ function ClickCounter({ t }) {
   return (
     <button className="btn btn-primary" aria-label="Click counter" onClick={() => setCount(c => c + 1)}>
       <span className="btn-icon" role="img" aria-label="click">🖱️</span>
-      <span>{t.click} {count} {t.times}</span>
+      {t.click} {count} {t.times}
     </button>
   );
 }
@@ -1293,7 +1293,7 @@ function ColorToggleButton({ t }) {
       onClick={() => setOn(o => !o)}
     >
       <span className="btn-icon" role="img" aria-label="color">🎨</span>
-      <span>{on ? t.martianGreen : t.martianRed}</span>
+      {on ? t.martianGreen : t.martianRed}
     </button>
   );
 }
