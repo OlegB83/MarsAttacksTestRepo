@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css'
 import reactLogo from './assets/react.svg';
+import { useTheme } from './contexts/ThemeContext';
+import ThemeToggle from './components/ThemeToggle';
 
 /**
  * @typedef {Object} Translation
@@ -176,6 +178,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('home');
   /** @type {Translation} */
   const t = translations[lang];
+  const { theme } = useTheme();
   return (
     <>
       {/* Navigation Bar */}
@@ -201,6 +204,7 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
+      <ThemeToggle />
       <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
           <span className="btn-icon" role="img" aria-label="language">🌐</span>
           <span>{t.lang}</span>

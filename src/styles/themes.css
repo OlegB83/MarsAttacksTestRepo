@@ -1,0 +1,123 @@
+/* CSS Custom Properties for Theme System */
+:root {
+  /* Default theme variables (dark theme as default to match Mars theme) */
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-accent: #ffff00;
+  --mars-red: #ff0000;
+  --mars-green: #00ff00;
+  --mars-yellow: #ffff00;
+  --nav-bg: rgba(0, 0, 0, 0.95);
+  --card-bg: linear-gradient(135deg, #001100 0%, #003300 100%);
+  --border-color: #00ff00;
+  --shadow-color: rgba(0, 255, 0, 0.3);
+  --glow-color: #00ff00;
+  
+  /* Theme transition */
+  --theme-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e8e8e8;
+  --text-primary: #2c2c2c;
+  --text-secondary: #4a4a4a;
+  --text-accent: #8B0000;
+  --mars-red: #CD853F;
+  --mars-green: #228B22;
+  --mars-yellow: #DAA520;
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --card-bg: linear-gradient(135deg, #fff8dc 0%, #f5deb3 100%);
+  --border-color: #cd853f;
+  --shadow-color: rgba(139, 0, 0, 0.3);
+  --glow-color: #cd853f;
+}
+
+/* Dark theme explicit definition */
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-accent: #ffff00;
+  --mars-red: #ff0000;
+  --mars-green: #00ff00;
+  --mars-yellow: #ffff00;
+  --nav-bg: rgba(0, 0, 0, 0.95);
+  --card-bg: linear-gradient(135deg, #001100 0%, #003300 100%);
+  --border-color: #00ff00;
+  --shadow-color: rgba(0, 255, 0, 0.3);
+  --glow-color: #00ff00;
+}
+
+/* Apply smooth transitions to all themed elements */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Ensure body background updates with theme */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Theme-aware scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--glow-color);
+}
+
+/* Theme-specific animations */
+[data-theme="light"] .hero-title {
+  text-shadow: 
+    0 0 10px var(--mars-red),
+    0 0 20px var(--mars-red),
+    0 0 30px var(--mars-red);
+}
+
+[data-theme="light"] .alien-overlay {
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(205, 133, 63, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(34, 139, 34, 0.2) 0%, transparent 50%);
+}
+
+[data-theme="light"] .mars-bg {
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 98px,
+      rgba(205, 133, 63, 0.1) 100px
+    );
+}
+
+/* Light theme features section background */
+[data-theme="light"] .features {
+  background: linear-gradient(45deg, #f5f5f5 25%, #fff8dc 25%, #fff8dc 50%, #f5f5f5 50%, #f5f5f5 75%, #fff8dc 75%);
+  background-size: 40px 40px;
+}
+
+/* Light theme footer */
+[data-theme="light"] .footer {
+  background: linear-gradient(90deg, #f5f5f5 0%, #f5deb3 50%, #f5f5f5 100%);
+  color: var(--mars-green);
+  border-top: 3px solid var(--mars-red);
+}
