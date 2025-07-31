@@ -101,7 +101,20 @@ const translations = {
     searchPlaceholder: 'Search items...',
     all: 'All',
     active: 'Active',
-    inactive: 'Inactive'
+    inactive: 'Inactive',
+    quantumChaos: 'Quantum Chaos Button',
+    quantumChaosDesc: 'Experience the randomness of the universe',
+    chaosActivated: 'CHAOS ACTIVATED!',
+    alienMessages: [
+      'ACK ACK ACK!',
+      'RESISTANCE IS FUTILE!',
+      'YOUR BRAIN WILL BE HARVESTED!',
+      'MARS EMPIRE RISES!',
+      'EARTHLINGS SURRENDER NOW!',
+      'UFO FLEET INCOMING!',
+      'DEATH RAYS CHARGING!',
+      'MIND CONTROL ENGAGED!'
+    ]
   },
   RU: {
     heroTitle: 'НАПАДЕНИЕ МАРСА!',
@@ -165,7 +178,20 @@ const translations = {
     searchPlaceholder: 'Поиск элементов...',
     all: 'Все',
     active: 'Активные',
-    inactive: 'Неактивные'
+    inactive: 'Неактивные',
+    quantumChaos: 'Кнопка Квантового Хаоса',
+    quantumChaosDesc: 'Испытайте случайность вселенной',
+    chaosActivated: 'ХАОС АКТИВИРОВАН!',
+    alienMessages: [
+      'АК АК АК!',
+      'СОПРОТИВЛЕНИЕ БЕСПОЛЕЗНО!',
+      'ВАШ МОЗГ БУДЕТ ИЗВЛЕЧЁН!',
+      'ИМПЕРИЯ МАРСА ВОССТАЁТ!',
+      'ЗЕМЛЯНЕ СДАВАЙТЕСЬ СЕЙЧАС!',
+      'ФЛОТ НЛО ПРИБЛИЖАЕТСЯ!',
+      'ЛУЧИ СМЕРТИ ЗАРЯЖАЮТСЯ!',
+      'КОНТРОЛЬ РАЗУМА ВКЛЮЧЁН!'
+    ]
   }
 };
 
@@ -689,6 +715,14 @@ function InteractiveComponentsPage({ t }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [chaosState, setChaosState] = useState({
+    color: '#ff0000',
+    size: 1,
+    rotation: 0,
+    message: '',
+    isActive: false,
+    effect: 'none'
+  });
 
   // Timer effect
   React.useEffect(() => {
@@ -740,6 +774,37 @@ function InteractiveComponentsPage({ t }) {
     setTimeout(() => {
       setToasts(prev => prev.filter(t => t.id !== id));
     }, 3000);
+  };
+
+  const activateQuantumChaos = () => {
+    const colors = ['#ff0000', '#00ff00', '#ffff00', '#ff00ff', '#00ffff', '#ffa500', '#800080'];
+    const effects = ['pulse', 'shake', 'spin', 'bounce', 'glow', 'morph'];
+    const sizes = [0.8, 1.2, 1.5, 0.6, 2.0];
+    
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
+    const randomRotation = Math.floor(Math.random() * 360);
+    const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+    const randomMessage = t.alienMessages[Math.floor(Math.random() * t.alienMessages.length)];
+    
+    setChaosState({
+      color: randomColor,
+      size: randomSize,
+      rotation: randomRotation,
+      message: randomMessage,
+      isActive: true,
+      effect: randomEffect
+    });
+
+    // Play a random alien sound effect (simulated)
+    if (Math.random() > 0.5) {
+      showToast(`${t.chaosActivated} ${randomMessage}`);
+    }
+
+    // Reset after animation
+    setTimeout(() => {
+      setChaosState(prev => ({ ...prev, isActive: false, message: '' }));
+    }, 2000);
   };
 
   const validateForm = () => {
@@ -1113,6 +1178,51 @@ function InteractiveComponentsPage({ t }) {
               {loading ? t.loading : t.submit}
             </button>
           </form>
+        </section>
+
+        {/* Quantum Chaos Button Demo */}
+        <section className="elements-section">
+          <h3>{t.quantumChaos}</h3>
+          <p>{t.quantumChaosDesc}</p>
+          <div className="quantum-chaos-demo" style={{ textAlign: 'center', padding: '2rem' }}>
+            <button 
+              className={`quantum-chaos-btn ${chaosState.isActive ? 'active' : ''} ${chaosState.effect}`}
+              onClick={activateQuantumChaos}
+              style={{
+                backgroundColor: chaosState.color,
+                transform: `scale(${chaosState.size}) rotate(${chaosState.rotation}deg)`,
+                transition: chaosState.isActive ? 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)' : 'background-color 0.3s ease',
+                padding: '1.5rem 3rem',
+                border: '3px solid #fff',
+                borderRadius: '50px',
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+                color: '#fff',
+                cursor: 'pointer',
+                boxShadow: `0 0 20px ${chaosState.color}`,
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em'
+              }}
+            >
+              <span className="chaos-icon" style={{ fontSize: '1.5em', marginRight: '0.5rem' }}>🌀</span>
+              {chaosState.isActive ? t.chaosActivated : t.quantumChaos}
+            </button>
+            {chaosState.message && (
+              <div className="chaos-message" style={{
+                marginTop: '1rem',
+                padding: '1rem',
+                backgroundColor: 'rgba(255, 0, 0, 0.8)',
+                color: '#fff',
+                borderRadius: '8px',
+                fontSize: '1.2rem',
+                fontWeight: 'bold',
+                textShadow: '0 0 10px #000',
+                animation: 'pulse 0.5s ease-in-out'
+              }}>
+                {chaosState.message}
+              </div>
+            )}
+          </div>
         </section>
 
         {/* Search and Filter Section */}
