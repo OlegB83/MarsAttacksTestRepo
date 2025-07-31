@@ -246,6 +246,10 @@ function HomePage({ t, setCurrentPage }) {
           <div className="ufo">🛸</div>
           <h1 className="hero-title">{t.heroTitle}</h1>
           <div className="hero-tagline">Defend Earth or Join the Martian Empire. The choice is yours!</div>
+          <div className="white-text-section">
+            <p className="white-main-text">Welcome to the ultimate Mars invasion experience!</p>
+            <p className="white-description">This is your portal to an interstellar adventure where Earth meets Mars in an epic battle for galactic supremacy.</p>
+          </div>
           <p className="hero-subtitle">
             {t.heroSubtitle}
           </p>

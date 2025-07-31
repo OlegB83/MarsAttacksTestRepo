@@ -126,6 +126,42 @@ html, body, #root {
   text-shadow: 0 0 8px #000, 0 0 2px #ff0;
   font-style: italic;
 }
+
+/* White text section styling */
+.white-text-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(5px);
+}
+
+.white-main-text {
+  font-size: 1.8rem;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+.white-description {
+  font-size: 1.2rem;
+  color: #ffffff;
+  opacity: 0.9;
+  line-height: 1.6;
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.3),
+    1px 1px 3px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
 .hero-cta {
   margin-top: 2rem;
   font-size: 1.3rem;
