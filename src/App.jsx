@@ -292,10 +292,6 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
-          <span className="btn-icon" role="img" aria-label="language">🌐</span>
-          {t.lang}
-        </button>
       <div className="mars-landing" id="main-content" role="main">
         {currentPage === 'home' ? (
           <HomePage t={t} setCurrentPage={setCurrentPage} />
@@ -421,6 +417,10 @@ function HomePage({ t, setCurrentPage }) {
       <footer id="footer" className="footer">
         <div className="container">
           <p>{t.footer}</p>
+          <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+            <span className="btn-icon" role="img" aria-label="language">🌐</span>
+            {t.lang}
+          </button>
         </div>
       </footer>
     </>
@@ -760,6 +760,17 @@ function invadeEarth() {
             </div>
           </div>
         </section>
+        
+        {/* Footer with Language Switcher */}
+        <footer className="footer">
+          <div className="container">
+            <p>ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION</p>
+            <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+              <span className="btn-icon" role="img" aria-label="language">🌐</span>
+              {t.lang}
+            </button>
+          </div>
+        </footer>
       </div>
     </div>
   );
@@ -1312,6 +1323,17 @@ function InteractiveComponentsPage({ t }) {
             </div>
           </div>
         </section>
+        
+        {/* Footer with Language Switcher */}
+        <footer className="footer">
+          <div className="container">
+            <p>ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION</p>
+            <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+              <span className="btn-icon" role="img" aria-label="language">🌐</span>
+              {t.lang}
+            </button>
+          </div>
+        </footer>
       </div>
     </div>
   );

@@ -252,6 +252,11 @@ html, body, #root {
     flex-wrap: wrap;
     justify-content: center;
   }
+  
+  .lang-switch-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+  }
 }
 
 .mars-landing {
@@ -1003,10 +1008,7 @@ html, body, #root {
 
 /* Language Switch Button */
 .lang-switch-btn {
-  position: fixed;
-  top: 1.5rem;
-  right: 2rem;
-  z-index: 3000;
+  position: static;
   background: linear-gradient(135deg, rgba(255, 0, 102, 0.2), rgba(0, 255, 204, 0.1));
   backdrop-filter: blur(20px);
   color: var(--accent-glow);
@@ -1021,6 +1023,10 @@ html, body, #root {
     0 5px 15px rgba(255, 0, 102, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-shadow: 0 0 10px var(--accent-glow);
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .lang-switch-btn:hover {
@@ -1165,12 +1171,6 @@ html, body, #root {
     justify-content: center;
   }
   
-  .lang-switch-btn {
-    top: 1rem;
-    right: 1rem;
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-  }
   
   :root {
     --particle-speed: 25s;
