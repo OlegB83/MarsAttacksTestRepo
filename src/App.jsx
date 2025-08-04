@@ -1,6 +1,93 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css'
 import reactLogo from './assets/react.svg';
+
+function ParticleSystem() {
+  const particlesRef = useRef(null);
+  
+  useEffect(() => {
+    const particleContainer = particlesRef.current;
+    if (!particleContainer) return;
+    
+    const createParticle = () => {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      // Random starting position
+      particle.style.left = Math.random() * 100 + 'vw';
+      particle.style.animationDelay = Math.random() * 20 + 's';
+      particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+      
+      particleContainer.appendChild(particle);
+      
+      // Remove particle after animation
+      setTimeout(() => {
+        if (particle.parentNode) {
+          particle.parentNode.removeChild(particle);
+        }
+      }, 25000);
+    };
+    
+    // Create initial particles
+    for (let i = 0; i < 30; i++) {
+      setTimeout(() => createParticle(), i * 100);
+    }
+    
+    // Continuously create particles
+    const interval = setInterval(createParticle, 800);
+    
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  
+  return <div ref={particlesRef} className="particle-system"></div>;
+}
+
+function FloatingShapes() {
+  const shapesRef = useRef(null);
+  
+  useEffect(() => {
+    const shapesContainer = shapesRef.current;
+    if (!shapesContainer) return;
+    
+    const shapes = ['triangle', 'circle', 'square'];
+    
+    const createShape = () => {
+      const shape = document.createElement('div');
+      const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+      shape.className = `shape ${shapeType}`;
+      
+      // Random starting position
+      shape.style.left = Math.random() * 100 + 'vw';
+      shape.style.animationDelay = Math.random() * 15 + 's';
+      shape.style.animationDuration = (12 + Math.random() * 8) + 's';
+      
+      shapesContainer.appendChild(shape);
+      
+      // Remove shape after animation
+      setTimeout(() => {
+        if (shape.parentNode) {
+          shape.parentNode.removeChild(shape);
+        }
+      }, 20000);
+    };
+    
+    // Create initial shapes
+    for (let i = 0; i < 15; i++) {
+      setTimeout(() => createShape(), i * 200);
+    }
+    
+    // Continuously create shapes
+    const interval = setInterval(createShape, 1200);
+    
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  
+  return <div ref={shapesRef} className="floating-shapes"></div>;
+}
 
 /**
  * @typedef {Object} Translation
@@ -178,6 +265,10 @@ function App() {
   const t = translations[lang];
   return (
     <>
+      <ParticleSystem />
+      <FloatingShapes />
+      <div className="morph-bg"></div>
+      
       {/* Navigation Bar */}
       <nav className="main-nav" role="navigation" aria-label="Main Navigation">
         <div className="nav-logo">
@@ -201,10 +292,6 @@ function App() {
         </ul>
       </nav>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
-          <span className="btn-icon" role="img" aria-label="language">🌐</span>
-          {t.lang}
-        </button>
       <div className="mars-landing" id="main-content" role="main">
         {currentPage === 'home' ? (
           <HomePage t={t} setCurrentPage={setCurrentPage} />
@@ -243,8 +330,8 @@ function HomePage({ t, setCurrentPage }) {
         </svg>
         <div className="alien-overlay"></div>
         <div className="hero-content">
-          <div className="ufo">🛸</div>
-          <h1 className="hero-title">{t.heroTitle}</h1>
+          <div className="ufo" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>🛸</div>
+          <h1 className="hero-title" data-text={t.heroTitle}>{t.heroTitle}</h1>
           <div className="hero-tagline">Defend Earth or Join the Martian Empire. The choice is yours!</div>
           <p className="hero-subtitle">
             {t.heroSubtitle}
@@ -330,6 +417,10 @@ function HomePage({ t, setCurrentPage }) {
       <footer id="footer" className="footer">
         <div className="container">
           <p>{t.footer}</p>
+          <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+            <span className="btn-icon" role="img" aria-label="language">🌐</span>
+            {t.lang}
+          </button>
         </div>
       </footer>
     </>
@@ -669,6 +760,17 @@ function invadeEarth() {
             </div>
           </div>
         </section>
+        
+        {/* Footer with Language Switcher */}
+        <footer className="footer">
+          <div className="container">
+            <p>ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION</p>
+            <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+              <span className="btn-icon" role="img" aria-label="language">🌐</span>
+              {t.lang}
+            </button>
+          </div>
+        </footer>
       </div>
     </div>
   );
@@ -1221,6 +1323,17 @@ function InteractiveComponentsPage({ t }) {
             </div>
           </div>
         </section>
+        
+        {/* Footer with Language Switcher */}
+        <footer className="footer">
+          <div className="container">
+            <p>ACK ACK ACK! • MARS EMPIRE © 2024 • ALL HUMANS RESERVED FOR EXPERIMENTATION</p>
+            <button className="lang-switch-btn" aria-label="Switch language" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>
+              <span className="btn-icon" role="img" aria-label="language">🌐</span>
+              {t.lang}
+            </button>
+          </div>
+        </footer>
       </div>
     </div>
   );
@@ -1234,12 +1347,26 @@ function DropdownSimulator({ t }) {
   const [show, setShow] = useState(false);
   return (
     <div>
-      <button className="btn btn-primary" aria-label={show ? t.dropdownHide : t.dropdownShow} onClick={() => setShow(s => !s)}>
+      <button 
+        className="btn btn-primary" 
+        aria-label={show ? t.dropdownHide : t.dropdownShow} 
+        onClick={() => setShow(s => !s)}
+        style={{ 
+          background: '#fff !important',
+          color: '#000 !important'
+        }}
+      >
         <span className="btn-icon" role="img" aria-label="dropdown">{show ? '▲' : '▼'}</span>
         {show ? t.dropdownHide : t.dropdownShow}
       </button>
       {show && (
-        <select style={{ marginLeft: '1rem', padding: '0.5rem', fontSize: '1rem' }}>
+        <select style={{ 
+          marginLeft: '1rem', 
+          padding: '0.5rem', 
+          fontSize: '1rem',
+          background: '#fff !important',
+          color: '#000 !important'
+        }}>
           <option>{t.martian}</option>
           <option>{t.venusian}</option>
           <option>{t.earthling}</option>
@@ -1255,7 +1382,15 @@ function TextLinesToggle({ t }) {
   const [show, setShow] = useState(false);
   return (
     <div>
-      <button className="btn btn-secondary" aria-label={show ? t.textHide : t.textShow} onClick={() => setShow(s => !s)}>
+      <button 
+        className="btn btn-secondary" 
+        aria-label={show ? t.textHide : t.textShow} 
+        onClick={() => setShow(s => !s)}
+        style={{ 
+          background: '#fff !important',
+          color: '#000 !important'
+        }}
+      >
         <span className="btn-icon" role="img" aria-label="toggle-text">{show ? '🙈' : '📝'}</span>
         {show ? t.textHide : t.textShow}
       </button>
@@ -1275,7 +1410,15 @@ function TextLinesToggle({ t }) {
 function ClickCounter({ t }) {
   const [count, setCount] = useState(0);
   return (
-    <button className="btn btn-primary" aria-label="Click counter" onClick={() => setCount(c => c + 1)}>
+    <button 
+      className="btn btn-primary" 
+      aria-label="Click counter" 
+      onClick={() => setCount(c => c + 1)}
+      style={{ 
+        background: '#fff !important',
+        color: '#000 !important'
+      }}
+    >
       <span className="btn-icon" role="img" aria-label="click">🖱️</span>
       {t.click} {count} {t.times}
     </button>
@@ -1291,6 +1434,10 @@ function ColorToggleButton({ t }) {
       className={on ? 'btn btn-secondary' : 'btn btn-primary'}
       aria-label="Toggle Martian color"
       onClick={() => setOn(o => !o)}
+      style={{ 
+        background: '#fff !important',
+        color: '#000 !important'
+      }}
     >
       <span className="btn-icon" role="img" aria-label="color">🎨</span>
       {on ? t.martianGreen : t.martianRed}
