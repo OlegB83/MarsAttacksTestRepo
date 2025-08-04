@@ -101,7 +101,17 @@ const translations = {
     searchPlaceholder: 'Search items...',
     all: 'All',
     active: 'Active',
-    inactive: 'Inactive'
+    inactive: 'Inactive',
+    weatherStation: 'Martian Weather Station',
+    temperature: 'Temperature',
+    pressure: 'Atmospheric Pressure',
+    windSpeed: 'Wind Speed',
+    dustStorm: 'Dust Storm Probability',
+    refreshWeather: 'Refresh Weather Data',
+    celsius: '°C',
+    fahrenheit: '°F',
+    sol: 'Sol',
+    currentSol: 'Current Sol'
   },
   RU: {
     heroTitle: 'НАПАДЕНИЕ МАРСА!',
@@ -165,7 +175,17 @@ const translations = {
     searchPlaceholder: 'Поиск элементов...',
     all: 'Все',
     active: 'Активные',
-    inactive: 'Неактивные'
+    inactive: 'Неактивные',
+    weatherStation: 'Марсианская Метеостанция',
+    temperature: 'Температура',
+    pressure: 'Атмосферное Давление',
+    windSpeed: 'Скорость Ветра',
+    dustStorm: 'Вероятность Пыльной Бури',
+    refreshWeather: 'Обновить Данные Погоды',
+    celsius: '°C',
+    fahrenheit: '°F',
+    sol: 'Сол',
+    currentSol: 'Текущий Сол'
   }
 };
 
@@ -298,6 +318,8 @@ function HomePage({ t, setCurrentPage }) {
             <ClickCounter t={t} />
             {/* Color toggle button */}
             <ColorToggleButton t={t} />
+            {/* Martian Weather Station */}
+            <WeatherStation t={t} />
           </div>
         </div>
       </section>
@@ -1295,5 +1317,227 @@ function ColorToggleButton({ t }) {
       <span className="btn-icon" role="img" aria-label="color">🎨</span>
       {on ? t.martianGreen : t.martianRed}
     </button>
+  );
+}
+
+// WeatherStation: displays Mars weather data with interactive controls
+/** @param {{ t: Translation }} props */
+function WeatherStation({ t }) {
+  const [weatherData, setWeatherData] = useState({
+    temperature: -63,
+    pressure: 610,
+    windSpeed: 15,
+    dustStorm: 23,
+    sol: 4157
+  });
+  const [unit, setUnit] = useState('celsius');
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const refreshWeather = () => {
+    setIsRefreshing(true);
+    setTimeout(() => {
+      setWeatherData({
+        temperature: Math.floor(Math.random() * 60) - 80, // -80 to -20°C
+        pressure: Math.floor(Math.random() * 400) + 400, // 400-800 Pa
+        windSpeed: Math.floor(Math.random() * 50) + 5, // 5-55 m/s
+        dustStorm: Math.floor(Math.random() * 100), // 0-100%
+        sol: weatherData.sol + Math.floor(Math.random() * 3) + 1
+      });
+      setIsRefreshing(false);
+    }, 1500);
+  };
+
+  const convertTemp = (temp) => {
+    return unit === 'celsius' ? temp : Math.round((temp * 9/5) + 32);
+  };
+
+  const getWeatherEmoji = () => {
+    if (weatherData.dustStorm > 70) return '🌪️';
+    if (weatherData.dustStorm > 40) return '🌫️';
+    if (weatherData.windSpeed > 30) return '💨';
+    return '🌡️';
+  };
+
+  return (
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      gap: '1rem',
+      background: 'linear-gradient(135deg, #2a1810, #4a2c1a)',
+      padding: '2rem',
+      borderRadius: '1rem',
+      border: '2px solid #ff6b35',
+      boxShadow: '0 0 20px rgba(255, 107, 53, 0.3)',
+      maxWidth: '500px',
+      width: '100%'
+    }}>
+      <h3 style={{ 
+        color: '#ff6b35', 
+        fontSize: '1.5rem', 
+        margin: '0',
+        textAlign: 'center',
+        textShadow: '0 0 10px rgba(255, 107, 53, 0.5)'
+      }}>
+        {getWeatherEmoji()} {t.weatherStation}
+      </h3>
+      
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        gap: '1rem', 
+        width: '100%',
+        fontSize: '0.9rem'
+      }}>
+        <div style={{ 
+          background: 'rgba(255, 107, 53, 0.1)', 
+          padding: '1rem', 
+          borderRadius: '0.5rem',
+          border: '1px solid rgba(255, 107, 53, 0.3)',
+          textAlign: 'center'
+        }}>
+          <div style={{ color: '#ff6b35', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+            🌡️ {t.temperature}
+          </div>
+          <div style={{ 
+            color: '#fff', 
+            fontSize: '1.5rem', 
+            fontWeight: 'bold',
+            textShadow: '0 0 5px rgba(255, 255, 255, 0.3)'
+          }}>
+            {isRefreshing ? '...' : `${convertTemp(weatherData.temperature)}${unit === 'celsius' ? t.celsius : t.fahrenheit}`}
+          </div>
+        </div>
+        
+        <div style={{ 
+          background: 'rgba(255, 107, 53, 0.1)', 
+          padding: '1rem', 
+          borderRadius: '0.5rem',
+          border: '1px solid rgba(255, 107, 53, 0.3)',
+          textAlign: 'center'
+        }}>
+          <div style={{ color: '#ff6b35', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+            📊 {t.pressure}
+          </div>
+          <div style={{ 
+            color: '#fff', 
+            fontSize: '1.5rem', 
+            fontWeight: 'bold',
+            textShadow: '0 0 5px rgba(255, 255, 255, 0.3)'
+          }}>
+            {isRefreshing ? '...' : `${weatherData.pressure} Pa`}
+          </div>
+        </div>
+        
+        <div style={{ 
+          background: 'rgba(255, 107, 53, 0.1)', 
+          padding: '1rem', 
+          borderRadius: '0.5rem',
+          border: '1px solid rgba(255, 107, 53, 0.3)',
+          textAlign: 'center'
+        }}>
+          <div style={{ color: '#ff6b35', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+            💨 {t.windSpeed}
+          </div>
+          <div style={{ 
+            color: '#fff', 
+            fontSize: '1.5rem', 
+            fontWeight: 'bold',
+            textShadow: '0 0 5px rgba(255, 255, 255, 0.3)'
+          }}>
+            {isRefreshing ? '...' : `${weatherData.windSpeed} m/s`}
+          </div>
+        </div>
+        
+        <div style={{ 
+          background: 'rgba(255, 107, 53, 0.1)', 
+          padding: '1rem', 
+          borderRadius: '0.5rem',
+          border: '1px solid rgba(255, 107, 53, 0.3)',
+          textAlign: 'center'
+        }}>
+          <div style={{ color: '#ff6b35', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+            🌪️ {t.dustStorm}
+          </div>
+          <div style={{ 
+            color: '#fff', 
+            fontSize: '1.5rem', 
+            fontWeight: 'bold',
+            textShadow: '0 0 5px rgba(255, 255, 255, 0.3)'
+          }}>
+            {isRefreshing ? '...' : `${weatherData.dustStorm}%`}
+          </div>
+        </div>
+      </div>
+      
+      <div style={{ 
+        display: 'flex', 
+        gap: '1rem', 
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        width: '100%'
+      }}>
+        <div style={{ 
+          color: '#ff6b35', 
+          fontSize: '1rem',
+          fontWeight: 'bold'
+        }}>
+          🗓️ {t.currentSol}: {weatherData.sol}
+        </div>
+        
+        <button 
+          onClick={() => setUnit(u => u === 'celsius' ? 'fahrenheit' : 'celsius')}
+          style={{
+            background: 'rgba(255, 107, 53, 0.2)',
+            color: '#ff6b35',
+            border: '1px solid #ff6b35',
+            padding: '0.5rem 1rem',
+            borderRadius: '0.25rem',
+            cursor: 'pointer',
+            fontSize: '0.8rem',
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease'
+          }}
+          onMouseOver={(e) => {
+            e.target.style.background = 'rgba(255, 107, 53, 0.3)';
+          }}
+          onMouseOut={(e) => {
+            e.target.style.background = 'rgba(255, 107, 53, 0.2)';
+          }}
+        >
+          {unit === 'celsius' ? '°F' : '°C'}
+        </button>
+        
+        <button 
+          onClick={refreshWeather}
+          disabled={isRefreshing}
+          style={{
+            background: isRefreshing ? '#666' : '#ff6b35',
+            color: 'white',
+            border: 'none',
+            padding: '0.5rem 1rem',
+            borderRadius: '0.25rem',
+            cursor: isRefreshing ? 'not-allowed' : 'pointer',
+            fontSize: '0.8rem',
+            fontWeight: 'bold',
+            transition: 'all 0.3s ease',
+            opacity: isRefreshing ? 0.6 : 1
+          }}
+          onMouseOver={(e) => {
+            if (!isRefreshing) {
+              e.target.style.background = '#e55a2b';
+            }
+          }}
+          onMouseOut={(e) => {
+            if (!isRefreshing) {
+              e.target.style.background = '#ff6b35';
+            }
+          }}
+        >
+          {isRefreshing ? '🔄 ...' : `🔄 ${t.refreshWeather}`}
+        </button>
+      </div>
+    </div>
   );
 }
