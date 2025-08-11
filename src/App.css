@@ -226,19 +226,29 @@ html, body, #root {
 /* Navigation button styling */
 .nav-btn {
   background: none;
-  border: none;
+  border: 2px solid #ffff00;
   color: #ffff00;
   font-weight: bold;
   font-size: 1.1rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.8rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 .nav-btn:hover, .nav-btn:focus {
   background: #ff0000;
   color: #fff;
-  box-shadow: 0 0 8px #ff0000;
+  border-color: #ff0000;
+  box-shadow: 0 0 15px #ff0000;
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
@@ -371,25 +381,34 @@ html, body, #root {
 }
 .hero-cta {
   margin-top: 2rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: bold;
   background: linear-gradient(135deg, var(--primary-glow), var(--accent-glow), var(--secondary-glow));
   background-size: 200% 200%;
   color: #000;
-  border: none;
-  border-radius: 2rem;
-  padding: 1.2rem 3rem;
+  border: 2px solid var(--primary-glow);
+  border-radius: 1rem;
+  padding: 1rem 2rem;
   box-shadow: 
     0 0 40px var(--primary-glow),
     0 0 80px var(--secondary-glow),
     inset 0 0 20px rgba(255, 255, 255, 0.2);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   animation: ctaGradient 3s ease-in-out infinite;
+  min-width: 220px;
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .hero-cta::before {
@@ -598,7 +617,7 @@ html, body, #root {
 
 /* Buttons */
 .btn {
-  padding: 1rem 2.5rem;
+  padding: 1rem 2rem;
   border: 2px solid;
   border-radius: 1rem;
   font-size: 1.1rem;
@@ -616,6 +635,11 @@ html, body, #root {
   overflow: hidden;
   backdrop-filter: blur(10px);
   transform-style: preserve-3d;
+  min-width: 220px;
+  min-height: 56px;
+  box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .btn::before {
