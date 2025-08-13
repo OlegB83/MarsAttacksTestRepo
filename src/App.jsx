@@ -261,6 +261,8 @@ function App() {
   const [lang, setLang] = useState('EN');
   /** @type {['home' | 'html-elements' | 'interactive-components', Function]} */
   const [currentPage, setCurrentPage] = useState('home');
+  /** @type {[boolean, Function]} */
+  const [ufoClicked, setUfoClicked] = useState(false);
   /** @type {Translation} */
   const t = translations[lang];
   return (
@@ -294,7 +296,7 @@ function App() {
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <div className="mars-landing" id="main-content" role="main">
         {currentPage === 'home' ? (
-          <HomePage t={t} setCurrentPage={setCurrentPage} />
+          <HomePage t={t} setCurrentPage={setCurrentPage} ufoClicked={ufoClicked} setUfoClicked={setUfoClicked} />
         ) : currentPage === 'html-elements' ? (
           <HTMLElementsPage t={t} />
         ) : (
@@ -305,7 +307,12 @@ function App() {
   )
 }
 
-function HomePage({ t, setCurrentPage }) {
+function HomePage({ t, setCurrentPage, ufoClicked, setUfoClicked }) {
+  const handleUfoClick = () => {
+    setUfoClicked(true);
+    setTimeout(() => setUfoClicked(false), 1000);
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -330,7 +337,20 @@ function HomePage({ t, setCurrentPage }) {
         </svg>
         <div className="alien-overlay"></div>
         <div className="hero-content">
-          <div className="ufo" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>🛸</div>
+          <div className={`ufo ${ufoClicked ? 'ufo-burst' : ''}`} onClick={() => {
+            setLang(l => l === 'EN' ? 'RU' : 'EN');
+            handleUfoClick();
+          }}>
+            🛸
+            {ufoClicked && (
+              <div className="ufo-particles">
+                <span className="particle-burst particle-1">✨</span>
+                <span className="particle-burst particle-2">⭐</span>
+                <span className="particle-burst particle-3">💫</span>
+                <span className="particle-burst particle-4">🌟</span>
+              </div>
+            )}
+          </div>
           <h1 className="hero-title" data-text={t.heroTitle}>{t.heroTitle}</h1>
           <div className="hero-tagline">Defend Earth or Join the Martian Empire. The choice is yours!</div>
           <p className="hero-subtitle">

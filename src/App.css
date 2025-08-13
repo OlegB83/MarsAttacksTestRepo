@@ -493,6 +493,72 @@ html, body, #root {
   animation-duration: 1s;
 }
 
+.ufo-burst {
+  animation: ufoBurst 0.8s ease-out !important;
+}
+
+.ufo-particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.particle-burst {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: particleBurst 1s ease-out forwards;
+}
+
+.particle-1 {
+  animation-delay: 0ms;
+  --direction: -45deg;
+}
+
+.particle-2 {
+  animation-delay: 100ms;
+  --direction: 45deg;
+}
+
+.particle-3 {
+  animation-delay: 200ms;
+  --direction: 135deg;
+}
+
+.particle-4 {
+  animation-delay: 300ms;
+  --direction: -135deg;
+}
+
+@keyframes ufoBurst {
+  0% { 
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 0 20px var(--primary-glow));
+  }
+  50% { 
+    transform: scale(1.5) rotate(180deg);
+    filter: drop-shadow(0 0 60px var(--primary-glow)) 
+            drop-shadow(0 0 80px var(--secondary-glow))
+            drop-shadow(0 0 100px var(--accent-glow));
+  }
+  100% { 
+    transform: scale(1) rotate(360deg);
+    filter: drop-shadow(0 0 30px var(--primary-glow));
+  }
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(cos(var(--direction)) * 100px), calc(sin(var(--direction)) * 100px)) scale(1);
+    opacity: 0;
+  }
+}
+
 @keyframes ufoFloat {
   0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
   25% { transform: translateY(-15px) translateX(5px) rotate(2deg); }
