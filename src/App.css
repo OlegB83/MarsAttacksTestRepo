@@ -1740,19 +1740,43 @@ meter {
   }
 }
 
-/* White background for form and navigation elements only */
-.nav-btn, select, input[type="text"], input[type="email"], textarea {
+/* White background for form elements only - nav buttons excluded */
+select, input[type="text"], input[type="email"], textarea {
   background-color: #fff !important;
   color: #000 !important;
 }
-.nav-btn:hover, select:hover, input[type="text"]:hover, input[type="email"]:hover, textarea:hover {
+select:hover, input[type="text"]:hover, input[type="email"]:hover, textarea:hover {
   background-color: #fff !important;
   color: #000 !important;
 }
-.nav-btn:focus, select:focus, input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+select:focus, input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
   background-color: #fff !important;
   color: #000 !important;
   outline: 2px solid #000;
+}
+
+/* Ensure navigation buttons are fully clickable */
+.nav-btn {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 100 !important;
+  background: none !important;
+  border: none !important;
+  color: #ffff00 !important;
+  font-weight: bold !important;
+  font-size: 1.1rem !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.3rem !important;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s !important;
+}
+
+.nav-btn:hover, .nav-btn:focus {
+  background: #ff0000 !important;
+  color: #fff !important;
+  box-shadow: 0 0 8px #ff0000 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
 }
 
 /* Ensure hero buttons maintain their original styling and are clickable */
@@ -1793,22 +1817,34 @@ meter {
   position: relative !important;
 }
 
-/* Ensure other buttons maintain functionality */
-.btn-primary, .btn-secondary, .hero-cta, .learn-more {
-  background: revert !important;
-  color: revert !important;
+/* Ensure all buttons maintain full functionality */
+.btn-primary, .btn-secondary, .hero-cta, .learn-more, .nav-btn {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 100 !important;
+  user-select: none !important;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .hero-cta:hover, .learn-more:hover {
   cursor: pointer !important;
   pointer-events: auto !important;
 }
 
-.btn-primary:hover, .btn-secondary:hover, .hero-cta:hover, .learn-more:hover {
-  background: revert !important;
-  color: revert !important;
+.btn-primary:focus, .btn-secondary:focus, .hero-cta:focus, .learn-more:focus {
+  cursor: pointer !important;
+  pointer-events: auto !important;
 }
 
-.btn-primary:focus, .btn-secondary:focus, .hero-cta:focus, .learn-more:focus {
-  background: revert !important;
-  color: revert !important;
+/* Ensure all button elements are clickable */
+button {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+button:disabled {
+  cursor: not-allowed !important;
+  pointer-events: auto !important;
 }
 
 /* Skip Link for Accessibility */
