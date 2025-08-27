@@ -344,7 +344,6 @@ function HomePage({ t, setCurrentPage }) {
         </div>
         <div className="mars-bg"></div>
       </section>
-      <div className="section-divider" />
       {/* Features Section */}
       <section id="features" className="features">
         <div className="container">
@@ -371,7 +370,6 @@ function HomePage({ t, setCurrentPage }) {
           </div>
         </div>
       </section>
-      <div className="section-divider" />
       {/* Interactive Test Section */}
       <section id="test-zone" className="features">
         <div className="container">
@@ -388,7 +386,6 @@ function HomePage({ t, setCurrentPage }) {
           </div>
         </div>
       </section>
-      <div className="section-divider" />
       {/* Navigation to HTML Elements Page */}
       <section className="html-elements-nav">
         <div className="container">
@@ -412,7 +409,6 @@ function HomePage({ t, setCurrentPage }) {
           </div>
         </div>
       </section>
-      <div className="section-divider" />
       {/* Footer */}
       <footer id="footer" className="footer">
         <div className="container">
