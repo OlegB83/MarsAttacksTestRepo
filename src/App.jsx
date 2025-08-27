@@ -261,13 +261,102 @@ function App() {
   const [lang, setLang] = useState('EN');
   /** @type {['home' | 'html-elements' | 'interactive-components', Function]} */
   const [currentPage, setCurrentPage] = useState('home');
+  /** @type {[boolean, Function]} */
+  const [popupVisible, setPopupVisible] = useState(false);
+  /** @type {[string, Function]} */
+  const [popupContent, setPopupContent] = useState('');
   /** @type {Translation} */
   const t = translations[lang];
+  const showPopup = (content) => {
+    setPopupContent(content);
+    setPopupVisible(true);
+  };
+
+  const hidePopup = () => {
+    setPopupVisible(false);
+    setPopupContent('');
+  };
+
   return (
     <>
       <ParticleSystem />
       <FloatingShapes />
       <div className="morph-bg"></div>
+      
+      {/* Funny Popup Modal */}
+      {popupVisible && (
+        <div className="popup-overlay" style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.9)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+          animation: 'fadeIn 0.3s ease-out'
+        }}>
+          <div className="popup-content" style={{
+            backgroundColor: '#1a1a1a',
+            padding: '3rem',
+            borderRadius: '15px',
+            border: '3px solid #ff0000',
+            maxWidth: '600px',
+            width: '90%',
+            textAlign: 'center',
+            boxShadow: '0 0 50px rgba(255, 0, 0, 0.5)',
+            position: 'relative',
+            animation: 'popupBounce 0.5s ease-out'
+          }}>
+            <div style={{
+              fontSize: '4rem',
+              marginBottom: '1rem'
+            }}>
+              🛸
+            </div>
+            <div style={{
+              color: '#ff0000',
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              marginBottom: '1.5rem',
+              textTransform: 'uppercase',
+              letterSpacing: '2px'
+            }}>
+              Martian High Command
+            </div>
+            <div style={{
+              color: 'white',
+              fontSize: '1.2rem',
+              lineHeight: '1.6',
+              marginBottom: '2rem'
+            }}>
+              {popupContent}
+            </div>
+            <button 
+              onClick={hidePopup}
+              style={{
+                backgroundColor: '#ff0000',
+                color: 'white',
+                border: 'none',
+                padding: '1rem 2rem',
+                fontSize: '1.1rem',
+                borderRadius: '25px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => e.target.style.backgroundColor = '#ff3333'}
+              onMouseOut={(e) => e.target.style.backgroundColor = '#ff0000'}
+            >
+              ACK ACK! UNDERSTOOD! 👽
+            </button>
+          </div>
+        </div>
+      )}
       
       {/* Navigation Bar */}
       <nav className="main-nav" role="navigation" aria-label="Main Navigation">
@@ -294,7 +383,7 @@ function App() {
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <div className="mars-landing" id="main-content" role="main">
         {currentPage === 'home' ? (
-          <HomePage t={t} setCurrentPage={setCurrentPage} />
+          <HomePage t={t} setCurrentPage={setCurrentPage} showPopup={showPopup} />
         ) : currentPage === 'html-elements' ? (
           <HTMLElementsPage t={t} />
         ) : (
@@ -305,7 +394,35 @@ function App() {
   )
 }
 
-function HomePage({ t, setCurrentPage }) {
+function HomePage({ t, setCurrentPage, showPopup }) {
+  const funnyMessages = {
+    join: [
+      "🚀 EXCELLENT CHOICE, EARTHLING! Your application to join our glorious invasion has been submitted. Side effects may include: temporary disintegration, chronic case of being green, and an irresistible urge to say 'ACK ACK ACK!' Report to the nearest UFO for your complimentary brain scan!",
+      "🛸 WELCOME TO TEAM MARS! Your starter kit includes: one death ray (batteries not included), a mind control helmet (one size fits most heads), and a 'How to Terrorize Humans' manual. Please note: Earth destruction is scheduled for next Tuesday. Bring snacks!",
+      "👽 CONGRATULATIONS! You've been promoted from 'potential lab rat' to 'honorary Martian minion!' Your first mission: convince three friends to join our cause. Failure will result in being turned into a decorative lawn ornament on Mars!",
+      "🌌 FANTASTIC! Your betrayal of your own species has been noted and appreciated. You'll receive your official 'Traitor to Humanity' badge in 3-5 business days. Warning: may cause awkward conversations at family dinners.",
+      "🔴 SPLENDID DECISION! As a new recruit, you get exclusive access to our Mars vacation packages (one-way tickets only) and complimentary alien abduction insurance. Terms and conditions apply in 47 different galaxies!"
+    ],
+    surrender: [
+      "🏳️ WISE CHOICE, PUNY HUMAN! Your surrender has been graciously accepted. Please form an orderly queue for brain extraction. Refreshments will NOT be provided. Thank you for choosing Mars Conquest Services - we're #1 in galactic domination!",
+      "😌 FINALLY, SOMEONE WITH SENSE! Your white flag has been received and processed. You've been assigned to Earth Colony Sector 7, where you'll spend your days polishing UFOs and serving as a test subject for our new ray guns. Enjoy your retirement from freedom!",
+      "🕊️ EXCELLENT CAPITULATION! As a token of our appreciation, you've won a lifetime supply of Martian food cubes (flavor: disappointment) and a cozy cell with a view of our beautiful red planet. Side effects may include existential dread and homesickness.",
+      "🛸 SURRENDER ACCEPTED! Don't worry, we'll take good care of Earth... by completely redecorating it with giant Martian monuments and converting all your pizza into nutritious space gruel. You're welcome for the improvement!",
+      "👽 VERY PRACTICAL OF YOU! Your submission form has been filed under 'Smart Humans Who Knew When to Quit.' You'll be spared... for now. Please report to the nearest mothership for your complimentary 'I Gave Up Without a Fight' t-shirt!"
+    ],
+    adventure: [
+      "⚡ ADVENTURE ACTIVATED! Congratulations, you've just volunteered for our 'Extreme Earth Defense vs Martian Invasion' reality show! First challenge: survive the next 5 minutes without being vaporized. Good luck, you'll need it! 🎯",
+      "🌟 BUCKLE UP, SPACE CADET! Your adventure begins with a complimentary alien abduction, followed by a scenic tour of our mothership's detention facilities. Rated 5 stars by zero humans who lived to tell about it!",
+      "⚡ ADVENTURE QUEST INITIATED! You've unlocked the 'Hopeless Human Hero' achievement! Your mission: save Earth with nothing but determination, questionable decision-making, and a 0.001% chance of success. Press F to pay respects... to yourself!",
+      "🎮 GAME ON! Welcome to 'Martian Invasion: Impossible Mode!' You are Player 1 in humanity's last stand. Plot twist: we already know the ending, and spoiler alert - it involves a lot of green aliens celebrating. But hey, good effort!",
+      "🚀 ADVENTURE LOADING... ERROR 404: HOPE NOT FOUND! Just kidding! Your heroic journey starts now. Will you save Earth or become another cautionary tale told around Martian campfires? Only one way to find out! (Hint: it's probably the campfire thing.)"
+    ]
+  };
+
+  const getRandomMessage = (type) => {
+    const messages = funnyMessages[type];
+    return messages[Math.floor(Math.random() * messages.length)];
+  };
   return (
     <>
       {/* Hero Section */}
@@ -337,9 +454,26 @@ function HomePage({ t, setCurrentPage }) {
             {t.heroSubtitle}
           </p>
           <div className="hero-buttons">
-            <button className="btn btn-primary" aria-label="Join the invasion"><span className="btn-icon" role="img" aria-label="join">🚀</span>{t.join}</button>
-            <button className="btn btn-secondary" aria-label="Surrender now"><span className="btn-icon" role="img" aria-label="surrender">🕊️</span>{t.surrender}</button>
-            <button className="hero-cta"><span className="btn-icon" role="img" aria-label="adventure">⚡</span>Start Your Adventure</button>
+            <button 
+              className="btn btn-primary" 
+              aria-label="Join the invasion"
+              onClick={() => showPopup(getRandomMessage('join'))}
+            >
+              <span className="btn-icon" role="img" aria-label="join">🚀</span>{t.join}
+            </button>
+            <button 
+              className="btn btn-secondary" 
+              aria-label="Surrender now"
+              onClick={() => showPopup(getRandomMessage('surrender'))}
+            >
+              <span className="btn-icon" role="img" aria-label="surrender">🕊️</span>{t.surrender}
+            </button>
+            <button 
+              className="hero-cta"
+              onClick={() => showPopup(getRandomMessage('adventure'))}
+            >
+              <span className="btn-icon" role="img" aria-label="adventure">⚡</span>Start Your Adventure
+            </button>
           </div>
         </div>
         <div className="mars-bg"></div>

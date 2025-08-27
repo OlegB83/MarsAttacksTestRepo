@@ -1887,4 +1887,136 @@ body, .mars-landing, .feature-card p {
   .table-container {
     font-size: 0.9rem;
   }
+
+  /* Popup responsive styles */
+  .popup-content {
+    width: 95% !important;
+    padding: 2rem !important;
+  }
+}
+
+/* Funny Popup Animations */
+@keyframes fadeIn {
+  0% { 
+    opacity: 0;
+  }
+  100% { 
+    opacity: 1;
+  }
+}
+
+@keyframes popupBounce {
+  0% { 
+    transform: scale(0.3) translateY(-100px) rotate(-5deg);
+    opacity: 0;
+  }
+  60% { 
+    transform: scale(1.1) translateY(10px) rotate(2deg);
+    opacity: 0.9;
+  }
+  80% { 
+    transform: scale(0.95) translateY(-5px) rotate(-1deg);
+    opacity: 1;
+  }
+  100% { 
+    transform: scale(1) translateY(0px) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* UFO floating animation for popup */
+.popup-content div:first-child {
+  animation: popupUfoFloat 2s ease-in-out infinite alternate;
+}
+
+@keyframes popupUfoFloat {
+  0% { 
+    transform: translateY(0px) rotate(-2deg);
+    filter: drop-shadow(0 0 20px #ff0000);
+  }
+  100% { 
+    transform: translateY(-10px) rotate(2deg);
+    filter: drop-shadow(0 0 30px #ff0000) drop-shadow(0 0 40px #00ff00);
+  }
+}
+
+/* Glowing border animation for popup */
+.popup-content::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, #ff0000, #ffff00, #00ff00, #ff0000);
+  border-radius: 18px;
+  z-index: -1;
+  animation: rotatingBorder 3s linear infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes rotatingBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Text typing effect for popup content */
+.popup-content > div:nth-child(4) {
+  overflow: hidden;
+  border-right: 2px solid #ff0000;
+  animation: typing 2s steps(40, end) 0.5s both, blinkCursor 1s infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes blinkCursor {
+  0%, 50% {
+    border-color: transparent;
+  }
+  51%, 100% {
+    border-color: #ff0000;
+  }
+}
+
+/* Button hover effect enhancement for popup */
+.popup-content button:hover {
+  transform: scale(1.05) translateY(-2px) !important;
+  box-shadow: 0 5px 20px rgba(255, 0, 0, 0.5) !important;
+  animation: buttonShake 0.3s ease-in-out !important;
+}
+
+@keyframes buttonShake {
+  0%, 100% { transform: scale(1.05) translateY(-2px) rotate(0deg); }
+  25% { transform: scale(1.05) translateY(-2px) rotate(-1deg); }
+  75% { transform: scale(1.05) translateY(-2px) rotate(1deg); }
+}
+
+/* Pulsing glow effect for popup overlay */
+.popup-overlay {
+  animation: overlayPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes overlayPulse {
+  0% { 
+    background-color: rgba(0,0,0,0.9);
+  }
+  100% { 
+    background-color: rgba(20,0,0,0.95);
+  }
 }
