@@ -1756,6 +1756,44 @@ meter {
 }
 
 /* Ensure hero buttons maintain their original styling and are clickable */
+.hero .btn-primary, .hero .btn-secondary, .hero .hero-cta {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 100 !important;
+  position: relative !important;
+  user-select: none !important;
+}
+
+.hero .btn-primary:hover, .hero .btn-secondary:hover, .hero .hero-cta:hover {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+.hero .btn-primary:focus, .hero .btn-secondary:focus, .hero .hero-cta:focus {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure all buttons in hero section are clickable */
+.hero button {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 100 !important;
+  position: relative !important;
+}
+
+/* Fix for any overlaying elements that might block clicks */
+.hero-content {
+  z-index: 50 !important;
+  position: relative !important;
+}
+
+.hero-buttons {
+  z-index: 60 !important;
+  position: relative !important;
+}
+
+/* Ensure other buttons maintain functionality */
 .btn-primary, .btn-secondary, .hero-cta, .learn-more {
   background: revert !important;
   color: revert !important;
