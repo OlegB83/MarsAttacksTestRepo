@@ -1740,19 +1740,37 @@ meter {
   }
 }
 
-/* White background for all clickable elements */
-button, .btn, .lang-switch-btn, a, select {
+/* White background for form and navigation elements only */
+.nav-btn, select, input[type="text"], input[type="email"], textarea {
   background-color: #fff !important;
   color: #000 !important;
 }
-button:hover, .btn:hover, .lang-switch-btn:hover, a:hover, select:hover {
+.nav-btn:hover, select:hover, input[type="text"]:hover, input[type="email"]:hover, textarea:hover {
   background-color: #fff !important;
   color: #000 !important;
 }
-button:focus, .btn:focus, .lang-switch-btn:focus, a:focus, select:focus {
+.nav-btn:focus, select:focus, input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
   background-color: #fff !important;
   color: #000 !important;
   outline: 2px solid #000;
+}
+
+/* Ensure hero buttons maintain their original styling and are clickable */
+.btn-primary, .btn-secondary, .hero-cta, .learn-more {
+  background: revert !important;
+  color: revert !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .hero-cta:hover, .learn-more:hover {
+  background: revert !important;
+  color: revert !important;
+}
+
+.btn-primary:focus, .btn-secondary:focus, .hero-cta:focus, .learn-more:focus {
+  background: revert !important;
+  color: revert !important;
 }
 
 /* Skip Link for Accessibility */
