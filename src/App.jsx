@@ -160,6 +160,19 @@ const translations = {
     htmlElementsTitle: 'HTML Elements Showcase',
     interactiveComponents: 'Interactive Components',
     interactiveComponentsTitle: 'Interactive React Components Showcase',
+    // Tooltip translations
+    tooltipJoin: 'Join the glorious Martian invasion! Side effects may include alien abduction.',
+    tooltipSurrender: 'Submit to our superior alien intellect. Resistance is futile anyway!',
+    tooltipAdventure: 'Embark on an epic space adventure! Warning: 99.9% chance of being vaporized.',
+    tooltipLearnMore: 'Discover more about our advanced alien technology and world domination plans.',
+    tooltipHtmlElements: 'Explore a showcase of HTML elements with Martian styling and effects.',
+    tooltipInteractive: 'Experience interactive React components with alien-themed demonstrations.',
+    tooltipBackHome: 'Return to the main invasion headquarters and mission control center.',
+    tooltipLanguage: 'Switch between Earth languages. We support multiple human dialects for convenience.',
+    tooltipNavHero: 'Navigate to the main invasion announcement and recruitment center.',
+    tooltipNavFeatures: 'View our advanced alien technologies and weapons of mass destruction.',
+    tooltipNavTest: 'Enter the interactive testing zone for human subjects and experiments.',
+    tooltipNavFooter: 'Scroll to the bottom for important invasion terms and conditions.',
     timer: 'Timer',
     startTimer: 'Start Timer',
     stopTimer: 'Stop Timer',
@@ -188,7 +201,20 @@ const translations = {
     searchPlaceholder: 'Search items...',
     all: 'All',
     active: 'Active',
-    inactive: 'Inactive'
+    inactive: 'Inactive',
+    // Tooltip translations
+    tooltipJoin: 'Join the glorious Martian invasion! Side effects may include alien abduction.',
+    tooltipSurrender: 'Submit to our superior alien intellect. Resistance is futile anyway!',
+    tooltipAdventure: 'Embark on an epic space adventure! Warning: 99.9% chance of being vaporized.',
+    tooltipLearnMore: 'Discover more about our advanced alien technology and world domination plans.',
+    tooltipHtmlElements: 'Explore a showcase of HTML elements with Martian styling and effects.',
+    tooltipInteractive: 'Experience interactive React components with alien-themed demonstrations.',
+    tooltipBackHome: 'Return to the main invasion headquarters and mission control center.',
+    tooltipLanguage: 'Switch between Earth languages. We support multiple human dialects for convenience.',
+    tooltipNavHero: 'Navigate to the main invasion announcement and recruitment center.',
+    tooltipNavFeatures: 'View our advanced alien technologies and weapons of mass destruction.',
+    tooltipNavTest: 'Enter the interactive testing zone for human subjects and experiments.',
+    tooltipNavFooter: 'Scroll to the bottom for important invasion terms and conditions.'
   },
   RU: {
     heroTitle: 'НАПАДЕНИЕ МАРСА!',
@@ -252,9 +278,34 @@ const translations = {
     searchPlaceholder: 'Поиск элементов...',
     all: 'Все',
     active: 'Активные',
-    inactive: 'Неактивные'
+    inactive: 'Неактивные',
+    // Tooltip translations
+    tooltipJoin: 'Присоединитесь к славному марсианскому вторжению! Побочные эффекты могут включать похищение пришельцами.',
+    tooltipSurrender: 'Подчинитесь нашему превосходящему инопланетному интеллекту. Сопротивление всё равно бесполезно!',
+    tooltipAdventure: 'Отправляйтесь в эпическое космическое приключение! Предупреждение: 99,9% шанс быть испарённым.',
+    tooltipLearnMore: 'Узнайте больше о наших передовых инопланетных технологиях и планах мирового господства.',
+    tooltipHtmlElements: 'Изучите витрину HTML элементов с марсианским стилем и эффектами.',
+    tooltipInteractive: 'Испытайте интерактивные React компоненты с демонстрациями в инопланетном стиле.',
+    tooltipBackHome: 'Вернитесь в главный штаб вторжения и центр управления миссией.',
+    tooltipLanguage: 'Переключайтесь между земными языками. Мы поддерживаем несколько человеческих диалектов для удобства.',
+    tooltipNavHero: 'Перейдите к главному объявлению о вторжении и центру вербовки.',
+    tooltipNavFeatures: 'Просмотрите наши передовые инопланетные технологии и оружие массового поражения.',
+    tooltipNavTest: 'Войдите в интерактивную зону тестирования для человеческих субъектов и экспериментов.',
+    tooltipNavFooter: 'Прокрутите вниз для важных условий и положений вторжения.'
   }
 };
+
+// Tooltip Component
+function Tooltip({ children, text, position = "top" }) {
+  if (!text) return children;
+  
+  return (
+    <div className={`tooltip tooltip-${position}`}>
+      {children}
+      <span className="tooltip-text">{text}</span>
+    </div>
+  );
+}
 
 function App() {
   /** @type {['EN' | 'RU', Function]} */
@@ -366,16 +417,16 @@ function App() {
         <ul className="nav-links">
           {currentPage === 'home' ? (
             <>
-              <li><a href="#hero">Hero</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#test-zone">Test Zone</a></li>
-              <li><button onClick={() => setCurrentPage('html-elements')} className="nav-btn">{t.htmlElements}</button></li>
-              <li><button onClick={() => setCurrentPage('interactive-components')} className="nav-btn">{t.interactiveComponents}</button></li>
-              <li><a href="#footer">Footer</a></li>
+              <li><Tooltip text={t.tooltipNavHero}><a href="#hero">Hero</a></Tooltip></li>
+              <li><Tooltip text={t.tooltipNavFeatures}><a href="#features">Features</a></Tooltip></li>
+              <li><Tooltip text={t.tooltipNavTest}><a href="#test-zone">Test Zone</a></Tooltip></li>
+              <li><Tooltip text={t.tooltipHtmlElements}><button onClick={() => setCurrentPage('html-elements')} className="nav-btn">{t.htmlElements}</button></Tooltip></li>
+              <li><Tooltip text={t.tooltipInteractive}><button onClick={() => setCurrentPage('interactive-components')} className="nav-btn">{t.interactiveComponents}</button></Tooltip></li>
+              <li><Tooltip text={t.tooltipNavFooter}><a href="#footer">Footer</a></Tooltip></li>
             </>
           ) : (
             <>
-              <li><button onClick={() => setCurrentPage('home')} className="nav-btn">{t.backToHome}</button></li>
+              <li><Tooltip text={t.tooltipBackHome}><button onClick={() => setCurrentPage('home')} className="nav-btn">{t.backToHome}</button></Tooltip></li>
             </>
           )}
         </ul>
@@ -447,33 +498,41 @@ function HomePage({ t, setCurrentPage, showPopup }) {
         </svg>
         <div className="alien-overlay"></div>
         <div className="hero-content">
-          <div className="ufo" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>🛸</div>
+          <Tooltip text={t.tooltipLanguage} position="bottom">
+            <div className="ufo" onClick={() => setLang(l => l === 'EN' ? 'RU' : 'EN')}>🛸</div>
+          </Tooltip>
           <h1 className="hero-title" data-text={t.heroTitle}>{t.heroTitle}</h1>
           <div className="hero-tagline">Defend Earth or Join the Martian Empire. The choice is yours!</div>
           <p className="hero-subtitle">
             {t.heroSubtitle}
           </p>
           <div className="hero-buttons">
-            <button 
-              className="btn btn-primary" 
-              aria-label="Join the invasion"
-              onClick={() => showPopup(getRandomMessage('join'))}
-            >
-              <span className="btn-icon" role="img" aria-label="join">🚀</span>{t.join}
-            </button>
-            <button 
-              className="btn btn-secondary" 
-              aria-label="Surrender now"
-              onClick={() => showPopup(getRandomMessage('surrender'))}
-            >
-              <span className="btn-icon" role="img" aria-label="surrender">🕊️</span>{t.surrender}
-            </button>
-            <button 
-              className="hero-cta"
-              onClick={() => showPopup(getRandomMessage('adventure'))}
-            >
-              <span className="btn-icon" role="img" aria-label="adventure">⚡</span>Start Your Adventure
-            </button>
+            <Tooltip text={t.tooltipJoin} position="top">
+              <button 
+                className="btn btn-primary" 
+                aria-label="Join the invasion"
+                onClick={() => showPopup(getRandomMessage('join'))}
+              >
+                <span className="btn-icon" role="img" aria-label="join">🚀</span>{t.join}
+              </button>
+            </Tooltip>
+            <Tooltip text={t.tooltipSurrender} position="top">
+              <button 
+                className="btn btn-secondary" 
+                aria-label="Surrender now"
+                onClick={() => showPopup(getRandomMessage('surrender'))}
+              >
+                <span className="btn-icon" role="img" aria-label="surrender">🕊️</span>{t.surrender}
+              </button>
+            </Tooltip>
+            <Tooltip text={t.tooltipAdventure} position="top">
+              <button 
+                className="hero-cta"
+                onClick={() => showPopup(getRandomMessage('adventure'))}
+              >
+                <span className="btn-icon" role="img" aria-label="adventure">⚡</span>Start Your Adventure
+              </button>
+            </Tooltip>
           </div>
         </div>
         <div className="mars-bg"></div>
@@ -487,19 +546,25 @@ function HomePage({ t, setCurrentPage, showPopup }) {
               <div className="feature-icon">👽</div>
               <h3>{t.brain}</h3>
               <p>{t.brainDesc}</p>
-              <button className="learn-more" aria-label="Learn more about brain extraction">Learn More</button>
+              <Tooltip text={t.tooltipLearnMore} position="bottom">
+                <button className="learn-more" aria-label="Learn more about brain extraction">Learn More</button>
+              </Tooltip>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🛸</div>
               <h3>{t.rays}</h3>
               <p>{t.raysDesc}</p>
-              <button className="learn-more" aria-label="Learn more about death rays">Learn More</button>
+              <Tooltip text={t.tooltipLearnMore} position="bottom">
+                <button className="learn-more" aria-label="Learn more about death rays">Learn More</button>
+              </Tooltip>
             </div>
             <div className="feature-card">
               <div className="feature-icon">🔴</div>
               <h3>{t.mind}</h3>
               <p>{t.mindDesc}</p>
-              <button className="learn-more" aria-label="Learn more about mind control">Learn More</button>
+              <Tooltip text={t.tooltipLearnMore} position="bottom">
+                <button className="learn-more" aria-label="Learn more about mind control">Learn More</button>
+              </Tooltip>
             </div>
           </div>
         </div>
