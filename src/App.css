@@ -269,27 +269,27 @@ html, body, #root {
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  bottom: 125%;
+  bottom: 130%;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, rgba(255, 0, 102, 0.95), rgba(0, 255, 204, 0.95));
+  background: linear-gradient(135deg, rgba(255, 0, 102, 0.98), rgba(0, 255, 204, 0.98));
   color: #fff;
   font-size: 0.9rem;
   font-weight: bold;
   padding: 0.8rem 1.2rem;
   border-radius: 0.8rem;
   white-space: nowrap;
-  z-index: 9999;
+  z-index: 10000;
   box-shadow: 
-    0 0 20px rgba(255, 0, 102, 0.6),
-    0 0 40px rgba(0, 255, 204, 0.3),
-    inset 0 0 15px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
+    0 4px 20px rgba(255, 0, 102, 0.8),
+    0 2px 10px rgba(0, 255, 204, 0.4),
+    inset 0 1px 3px rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
   text-align: center;
   letter-spacing: 0.5px;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  transition: all 0.2s ease-out;
   pointer-events: none;
 }
 
@@ -309,23 +309,7 @@ html, body, #root {
 .tooltip:focus-within .tooltip-text {
   visibility: visible;
   opacity: 1;
-  transform: translateX(-50%) translateY(-5px);
-  animation: tooltipGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes tooltipGlow {
-  0% {
-    box-shadow: 
-      0 0 20px rgba(255, 0, 102, 0.6),
-      0 0 40px rgba(0, 255, 204, 0.3),
-      inset 0 0 15px rgba(255, 255, 255, 0.2);
-  }
-  100% {
-    box-shadow: 
-      0 0 30px rgba(255, 0, 102, 0.8),
-      0 0 60px rgba(0, 255, 204, 0.5),
-      inset 0 0 20px rgba(255, 255, 255, 0.4);
-  }
+  transform: translateX(-50%) translateY(-3px);
 }
 
 /* Tooltip variations for different positions */
@@ -433,15 +417,16 @@ html, body, #root {
   font-family: inherit;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-size: 0.8rem;
 }
 
 .hero-cta.tooltip .tooltip-text {
-  background: linear-gradient(135deg, rgba(255, 255, 0, 0.95), rgba(255, 0, 102, 0.95));
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, rgba(255, 255, 0, 0.98), rgba(255, 0, 102, 0.98));
+  border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .nav-btn.tooltip .tooltip-text {
-  background: linear-gradient(135deg, rgba(255, 0, 0, 0.95), rgba(255, 255, 0, 0.95));
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.98), rgba(255, 255, 0, 0.98));
 }
 
 .mars-landing {
@@ -573,8 +558,8 @@ html, body, #root {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: ctaGradient 3s ease-in-out infinite;
+  transition: all 0.3s ease-out;
+  animation: none;
 }
 
 .hero-cta::before {
@@ -603,13 +588,8 @@ html, body, #root {
     0 0 100px var(--secondary-glow),
     0 10px 30px rgba(0, 0, 0, 0.5),
     inset 0 0 30px rgba(255, 255, 255, 0.3);
-  transform: scale(1.1) translateY(-5px);
-  text-shadow: 0 0 20px #fff;
-}
-
-@keyframes ctaGradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  transform: scale(1.05) translateY(-3px);
+  text-shadow: 0 0 15px #fff;
 }
 
 @keyframes shimmer {
@@ -844,10 +824,10 @@ html, body, #root {
   box-shadow: 
     0 0 50px var(--accent-glow),
     0 0 80px var(--primary-glow),
-    0 10px 30px rgba(255, 255, 0, 0.3),
+    0 8px 25px rgba(255, 255, 0, 0.3),
     inset 0 0 30px rgba(255, 255, 255, 0.2);
-  transform: scale(1.1) translateY(-3px) rotateX(5deg);
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+  transform: scale(1.05) translateY(-2px);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
 }
 
 .btn-secondary {
@@ -868,10 +848,10 @@ html, body, #root {
   box-shadow: 
     0 0 50px var(--secondary-glow),
     0 0 80px rgba(0, 255, 204, 0.5),
-    0 10px 30px rgba(0, 255, 204, 0.4),
+    0 8px 25px rgba(0, 255, 204, 0.4),
     inset 0 0 30px rgba(255, 255, 255, 0.2);
-  transform: scale(1.1) translateY(-3px) rotateX(-5deg);
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+  transform: scale(1.05) translateY(-2px);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
 }
 
 /* Features Section */
